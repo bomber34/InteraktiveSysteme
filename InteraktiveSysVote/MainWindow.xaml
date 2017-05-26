@@ -8,11 +8,15 @@
         Title="VotierGedöns" Height="320" Width="525">
     <Grid>
         <DockPanel HorizontalAlignment="Left" Height="50" LastChildFill="False" VerticalAlignment="Top" Width="517">
-            <Button x:Name="addSubjectBtn" Content="+" FontSize="25" Height="50" VerticalAlignment="Top" Width="80" Click="addSubjectBtn_Click"/>
+            <Button x:Name="addSubjectBtn" Content="+" FontSize="25" Height="50" VerticalAlignment="Top" Width="80" Click="AddSubjectBtn_Click"/>
             <Button x:Name="editSubjectBtn" Content="EDIT" FontSize ="25" Height="50" VerticalAlignment="Top" Width="75" Click="EditSubjectBtn_Click"/>
             <Button x:Name="deleteSubjectBtn" Content="Löschen" FontSize="20" Height="50" VerticalAlignment="Top" Width="75" Click="DeleteSubjectBtn_Click"/>
         </DockPanel>
-        <DockPanel HorizontalAlignment="Left" Height="239" LastChildFill="False" Margin="0,50,0,0" VerticalAlignment="Top" Width="517"/>
+        <Grid x:Name="SubjectGrid" HorizontalAlignment="Left" Height="234" Margin="0,55,0,0" VerticalAlignment="Top" Width="517" Grid.Column="1" Grid.Row="5">
+           
+        </Grid>
+
+
 
 
     </Grid>

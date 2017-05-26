@@ -20,6 +20,7 @@ namespace InteraktiveSysVote
     /// </summary>
     public partial class MainWindow : Window
     {
+        private int noOfSubs = 1;
         public MainWindow()
         {
             InitializeComponent();
@@ -27,7 +28,17 @@ namespace InteraktiveSysVote
 
         private void AddSubjectBtn_Click(object sender, RoutedEventArgs e)
         {
+            //Simple test 
+            // Just add elements dynamically to the grid
+            Label example = new Label();
+            example.Content = "Fach ";
+            example.Content += noOfSubs.ToString();
+            RowDefinition row = new RowDefinition();
+            SubjectGrid.RowDefinitions.Add(row);
+            Grid.SetRow(example, noOfSubs - 1);
+            noOfSubs++;
 
+            SubjectGrid.Children.Add(example);
         }
 
         private void EditSubjectBtn_Click(object sender, RoutedEventArgs e)
