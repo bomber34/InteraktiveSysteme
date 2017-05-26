@@ -24,5 +24,20 @@ namespace InteraktiveSysVote
         {
             InitializeComponent();
         }
+
+        private void AddSubjectBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void EditSubjectBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DeleteSubjectBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
