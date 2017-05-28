@@ -29,16 +29,10 @@ namespace InteraktiveSysVote
         private void AddSubjectBtn_Click(object sender, RoutedEventArgs e)
         {
             //Simple test 
-            // Just add elements dynamically to the grid
-            Label example = new Label();
-            example.Content = "Fach ";
-            example.Content += noOfSubs.ToString();
-            RowDefinition row = new RowDefinition();
-            SubjectGrid.RowDefinitions.Add(row);
-            Grid.SetRow(example, noOfSubs - 1);
-            noOfSubs++;
-
-            SubjectGrid.Children.Add(example);
+            // Just add elements dynamically to the stack
+            SubjectPanel example = new SubjectPanel(noOfSubs++);
+            SubjectStack.Children.Add(example);
+            
         }
 
         private void EditSubjectBtn_Click(object sender, RoutedEventArgs e)
@@ -48,7 +42,11 @@ namespace InteraktiveSysVote
 
         private void DeleteSubjectBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            //Only remove if there exist removable elements
+            if (SubjectStack.Children.Count != 0) {
+                SubjectStack.Children.RemoveAt(SubjectStack.Children.Count - 1);
+                noOfSubs--;
+            }
         }
     }
 }
