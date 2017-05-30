@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="InteraktiveSysVote.HomeWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:InteraktiveSysVote"
+             mc:Ignorable="d" 
+             d:DesignHeight="525" d:DesignWidth="525">
+    <Grid Background="White">
+        <!--Options-->
+        <DockPanel HorizontalAlignment="Stretch" Height="50" LastChildFill="False" VerticalAlignment="Top" Width="Auto">
+            <Button x:Name="addSubjectBtn" Content="+" FontSize="25" Height="50" VerticalAlignment="Top" Width="80" Click="addSubjectBtn_Click_1"/>
+            <Button x:Name="editSubjectBtn" Content="EDIT" FontSize ="25" Height="50" VerticalAlignment="Top" Width="75" Click="editSubjectBtn_Click"/>
+            <Button x:Name="deleteSubjectBtn" Content="Löschen" FontSize="20" Height="50" VerticalAlignment="Top" Width="75" Click="deleteSubjectBtn_Click"/>
+        </DockPanel>
+        <!--Design Filler -->
+        <Label x:Name="label" Content="Fächer" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" 
+               Margin="0,50,0,0" VerticalAlignment="Top" Height="50" Width="517"
+               Background="Beige" FontSize="30"/>
+        <!--SubjectPanels-->
+        <StackPanel x:Name="SubjectStack" HorizontalAlignment="Left" Height="Auto" Margin="0,100,0,0" VerticalAlignment="Top" Width="517"/>
+
+
+    </Grid>
+</UserControl>

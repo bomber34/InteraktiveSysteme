@@ -56,13 +56,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CreateSubjectWindow.xaml.cs">
+      <DependentUpon>CreateSubjectWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ExercisePanel.xaml.cs">
       <DependentUpon>ExercisePanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HomeWindow.xaml.cs">
+      <DependentUpon>HomeWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="SubjectPanel.xaml.cs">
       <DependentUpon>SubjectPanel.xaml</DependentUpon>
     </Compile>
+    <Page Include="CreateSubjectWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ExercisePanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HomeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

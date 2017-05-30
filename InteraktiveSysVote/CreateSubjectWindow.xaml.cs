@@ -16,16 +16,23 @@ using System.Windows.Shapes;
 namespace InteraktiveSysVote
 {
     /// <summary>
-    /// Interaktionslogik für MainWindow.xaml
+    /// Interaktionslogik für CreateSubjectWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class CreateSubjectWindow : UserControl
     {
-     
-        public MainWindow()
+        public CreateSubjectWindow()
         {
             InitializeComponent();
         }
 
+        private void Accept_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO: implement accept
+        }
 
+        private void Abbrechen_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO: implement abort
+        }
     }
 }

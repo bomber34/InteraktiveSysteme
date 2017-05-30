@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-c:\users\pc\documents\visual studio 2017\Projects\InteraktiveSysVote\InteraktiveSysVote\obj\Debug\
+C:\Users\PC\documents\visual studio 2017\Projects\InteraktiveSysVote\InteraktiveSysVote\obj\Debug\
 InteraktiveSysVote
 none
 false
 DEBUG;TRACE
-c:\users\pc\documents\visual studio 2017\Projects\InteraktiveSysVote\InteraktiveSysVote\App.xaml
-11151548125
+C:\Users\PC\documents\visual studio 2017\Projects\InteraktiveSysVote\InteraktiveSysVote\App.xaml
+5-1264576090
 
-92018902815
-13738642453
-MainWindow.xaml;
+13-943884997
+15767094614
+CreateSubjectWindow.xaml;ExercisePanel.xaml;HomeWindow.xaml;MainWindow.xaml;SubjectPanel.xaml;
 
-True
+False
 
