@@ -30,8 +30,13 @@ namespace InteraktiveSysVote
         {
             //Simple test 
             // Just add elements dynamically to the stack
+            ///TODO: change to a better listing
             SubjectPanel example = new SubjectPanel(noOfSubs++);
             SubjectStack.Children.Add(example);
+            //Example for exercise panel Look
+            ///Todo: remove later
+            ExercisePanel exercise = new ExercisePanel();
+            SubjectStack.Children.Add(exercise);
             
         }
 

@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="InteraktiveSysVote.ExercisePanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:InteraktiveSysVote"
+             mc:Ignorable="d" >
+    <Border BorderThickness="0,2,0,2" BorderBrush="Black">
+    <Grid Background="White">
+        <Label x:Name="exerciseLabel" Content="Übung "  Width="300" Height="Auto"/>
+        <Grid Margin="0,25,0,0">
+            <!-- Grid Design -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!--Static Content-->
+            <Label Content="Votiert: " Grid.Row="1" Grid.Column="0"/>
+            <Label Content="von" HorizontalContentAlignment="Center"  Grid.Row="1" Grid.Column="2"/>
+            <!-- Buttons -->
+            <Label x:Name="incDone" Content="▲" HorizontalContentAlignment="Center" Grid.Column="1" Grid.Row="0"/>
+            <Label x:Name="decDone" Content="▼" HorizontalContentAlignment="Center" Grid.Column="1" Grid.Row="2"/>
+            <Label x:Name="incTotal" Content="▲" HorizontalContentAlignment="Center" Grid.Column="3" Grid.Row="0"/>
+            <Label x:Name="decTotal" Content="▼" HorizontalContentAlignment="Center" Grid.Column="3" Grid.Row="2"/>
+            <!-- changable Content -->
+            <TextBox x:Name="votedTasks" Margin="20,0,20,0" Grid.Column="1" Grid.Row="1"/>
+            <TextBox x:Name="totalTasks" Margin="20,0,20,0" Grid.Column="3" Grid.Row="1"/>
+        </Grid>
+    </Grid>
+    </Border>
+</UserControl>
