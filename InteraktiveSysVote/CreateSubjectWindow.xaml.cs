@@ -34,6 +34,7 @@ namespace InteraktiveSysVote
             int exerciseAmount = Int32.Parse(numOfExercises.Text);
             SubjectPanel newSubject = new SubjectPanel(subName, goalVote, goalPresent, exerciseAmount);
             MainWindow.homeView.SubjectStack.Children.Add(newSubject);
+            
 
             //return to main menu
             MainWindow.mainWindow.Children.RemoveAt(0);

@@ -8,7 +8,6 @@
              d:DesignHeight="525" d:DesignWidth="525">
     <Grid Background="White">
         <DockPanel HorizontalAlignment="Stretch" Height="50" LastChildFill="False" VerticalAlignment="Top" Width="Auto">
-            <Button x:Name="HomeBtn" Content="Home" FontSize="25" Height="50" VerticalAlignment="Top" Width="80"/>
         </DockPanel>
         <Grid Margin="0,50,0,0">
             <!-- Grid design -->
@@ -34,6 +33,10 @@
             <Label Content="Mindestvorträge:" Grid.Row="3" Grid.Column="0" FontSize="16" VerticalContentAlignment="Center"/>
             <Label Content="Anzahl Übungen:" Grid.Row="4" Grid.Column="0" FontSize="16" VerticalContentAlignment="Center"/>
             <Label Content="%" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Grid.Row="2" Grid.Column="2" FontSize="16"/>
+            <Label x:Name="goalVoteInputerror" Content="" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="16" Foreground="Red" />
+            <Label x:Name="MinimumVoteInputerror" Content="" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="16" Foreground="Red" />
+            <Label x:Name="ExerciseAmountInputerror" Content="" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="16" Foreground="Red" />
+
             <!-- Buttons -->
             <Button x:Name="accept" Margin="10,10,10,10" Grid.Row="5" Grid.Column="1" Content="Erstellen" FontSize="16" Click="Accept_Click" />
             <Button x:Name="Abbrechen" Margin="10,10,10,10" Grid.Row="5" Grid.Column="2" Content="Abbrechen" FontSize="16" Click="Abbrechen_Click"/>
