@@ -28,15 +28,21 @@ namespace InteraktiveSysVote
             InitializeComponent();
         }
 
-        public SubjectPanel(int subjectNo)
+        public SubjectPanel(string subjectName, int avgVoteGoal, int minPresent, int numOfExercises)
         {
             InitializeComponent();
-            Fach.Content += subjectNo.ToString();
+            Fach.Content = subjectName;
+            goalVoted.Content = avgVoteGoal.ToString();
+            GoalPresent.Content = minPresent.ToString();
+
+            // TODO Add SubjectWindow to this Panel for access
+            //numberOfExercises is important for calculating
+       
         }
 
         private void UserControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            //TODO: If double clicked it should go to the specific subject window
+            // TODO If double clicked it should go to the specific subject window
             if(!test)
             {
                 content = Fach.Content.ToString();

@@ -20,7 +20,6 @@ namespace InteraktiveSysVote
     /// </summary>
     public partial class HomeWindow : UserControl
     {
-        private int noOfSubs = 1;
         public HomeWindow()
         {
             InitializeComponent();
@@ -28,36 +27,20 @@ namespace InteraktiveSysVote
 
         private void AddSubjectBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            CreateSubjectWindow createNewSub = new CreateSubjectWindow();
+            MainWindow.mainWindow.Children.RemoveAt(0);
+            MainWindow.mainWindow.Children.Add(createNewSub);
+          
         }
 
-        private void deleteSubjectBtn_Click(object sender, RoutedEventArgs e)
+        private void DeleteSubjectBtn_Click(object sender, RoutedEventArgs e)
         {
-            //Only remove if there exist removable elements
-            if (SubjectStack.Children.Count != 0)
-            {
-                SubjectStack.Children.RemoveAt(SubjectStack.Children.Count - 1);
-                noOfSubs--;
-            }
+            // TODO implement            
         }
 
-        private void editSubjectBtn_Click(object sender, RoutedEventArgs e)
+        private void EditSubjectBtn_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void addSubjectBtn_Click_1(object sender, RoutedEventArgs e)
-        {
-            //Simple test 
-            // Just add elements dynamically to the stack
-            ///TODO: change to a better listing
-            SubjectPanel example = new SubjectPanel(noOfSubs++);
-            SubjectStack.Children.Add(example);
-            //Example for exercise panel Look
-            ///Todo: remove later
-            ExercisePanel exercise = new ExercisePanel();
-            SubjectStack.Children.Add(exercise);
-
+            // TODO implement  
         }
     }
 }

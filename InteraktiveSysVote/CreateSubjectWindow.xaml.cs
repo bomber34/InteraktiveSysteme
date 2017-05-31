@@ -27,12 +27,24 @@ namespace InteraktiveSysVote
 
         private void Accept_Click(object sender, RoutedEventArgs e)
         {
-            //TODO: implement accept
+            // TODO Exception Handling: Tell people if they fucked up
+            string subName = subjectName.Text;
+            int goalVote = Int32.Parse(goalVoteAvg.Text);
+            int goalPresent = Int32.Parse(goalPresentation.Text);
+            int exerciseAmount = Int32.Parse(numOfExercises.Text);
+            SubjectPanel newSubject = new SubjectPanel(subName, goalVote, goalPresent, exerciseAmount);
+            MainWindow.homeView.SubjectStack.Children.Add(newSubject);
+
+            //return to main menu
+            MainWindow.mainWindow.Children.RemoveAt(0);
+            MainWindow.mainWindow.Children.Add(MainWindow.homeView);
         }
 
+        // Just return home without changes
         private void Abbrechen_Click(object sender, RoutedEventArgs e)
         {
-            //TODO: implement abort
+            MainWindow.mainWindow.Children.RemoveAt(0);
+            MainWindow.mainWindow.Children.Add(MainWindow.homeView);
         }
     }
 }
