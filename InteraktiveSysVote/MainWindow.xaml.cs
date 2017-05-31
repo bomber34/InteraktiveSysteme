@@ -26,10 +26,6 @@ namespace InteraktiveSysVote
         public MainWindow()
         {
 
-            // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-            // Hallo André :)
-            // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-
             InitializeComponent();
             mainWindow = new Grid();
             homeView = new HomeWindow();
