@@ -20,6 +20,5 @@
         <!--SubjectPanels-->
         <StackPanel x:Name="SubjectStack" HorizontalAlignment="Left" Height="Auto" Margin="0,100,0,0" VerticalAlignment="Top" Width="517"/>
 
-
     </Grid>
 </UserControl>

@@ -20,41 +20,29 @@ namespace InteraktiveSysVote
     /// </summary>
     public partial class SubjectPanel : UserControl
     {
-        private bool test = false;
-        private string content;
+        private ExerciseWindow exerciseMenu;
 
         public SubjectPanel()
         {
             InitializeComponent();
         }
 
-        public SubjectPanel(string subjectName, int avgVoteGoal, int minPresent, int numOfExercises)
+        public SubjectPanel(string subjectName, int avgVoteGoal, int minPresent, int numOfTasks, int numOfExercises)
         {
             InitializeComponent();
             Fach.Content = subjectName;
             goalVoted.Content = avgVoteGoal.ToString();
             GoalPresent.Content = minPresent.ToString();
 
-            // TODO Add SubjectWindow to this Panel for access
-            //numberOfExercises is important for calculating
+            
+            exerciseMenu = new ExerciseWindow(this, subjectName, minPresent, numOfTasks , numOfExercises);
        
         }
 
         private void UserControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            // TODO If double clicked it should go to the specific subject window
-            if(!test)
-            {
-                content = Fach.Content.ToString();
-                Fach.Content = "Is Selected";
-                test = true;
-            }
-
-            else
-            {
-                Fach.Content = content;
-                test = false;
-            }
+            MainWindow.mainWindowGrid.Children.RemoveAt(0);
+            MainWindow.mainWindowGrid.Children.Add(exerciseMenu);
         }
     }
 }

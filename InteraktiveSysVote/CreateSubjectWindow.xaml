@@ -18,6 +18,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -25,26 +26,31 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            
+
             <!-- Labels -->
             <Label Content="Fach erstellen" Grid.ColumnSpan="4" Background="Beige" FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
             <Label Content="Name: " Grid.Row="1" Grid.Column="0" FontSize="16" VerticalContentAlignment="Center" />
             <Label Content="Mindestschnitt:" Grid.Row="2" Grid.Column="0" FontSize="16" VerticalContentAlignment="Center" />
-            <Label Content="Mindestvorträge:" Grid.Row="3" Grid.Column="0" FontSize="16" VerticalContentAlignment="Center"/>
-            <Label Content="Anzahl Übungen:" Grid.Row="4" Grid.Column="0" FontSize="16" VerticalContentAlignment="Center"/>
             <Label Content="%" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Grid.Row="2" Grid.Column="2" FontSize="16"/>
-            <Label x:Name="goalVoteInputerror" Content="" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="16" Foreground="Red" />
-            <Label x:Name="MinimumVoteInputerror" Content="" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="16" Foreground="Red" />
-            <Label x:Name="ExerciseAmountInputerror" Content="" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="16" Foreground="Red" />
+            <Label Content="Mindestvorträge:" Grid.Row="3" Grid.Column="0" FontSize="16" VerticalContentAlignment="Center"/>
+            <!-- &#x0a is a hex code for a new line-->
+            <Label Content="Anzahl Aufgaben&#x0a;    pro Übung:" Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="0" FontSize="16" VerticalContentAlignment="Center"/>
+            <Label Content="Anzahl Übungen:" Grid.Row="5" Grid.Column="0" FontSize="16" VerticalContentAlignment="Center"/>
+            <!-- Error Labels -->
+            <Label x:Name="GoalVoteInputError" Content="" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="16" Foreground="Red" />
+            <Label x:Name="MinimumPresentationInputError" Content="" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="16" Foreground="Red" />
+            <Label x:Name="TaskAmountInputError" Content="" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="16" Foreground="Red" />
+            <Label x:Name="ExerciseAmountInputError" Content="" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="16" Foreground="Red" />
 
             <!-- Buttons -->
-            <Button x:Name="accept" Margin="10,10,10,10" Grid.Row="5" Grid.Column="1" Content="Erstellen" FontSize="16" Click="Accept_Click" />
-            <Button x:Name="Abbrechen" Margin="10,10,10,10" Grid.Row="5" Grid.Column="2" Content="Abbrechen" FontSize="16" Click="Abbrechen_Click"/>
+            <Button x:Name="accept" Background="Green" Foreground="White" Margin="10,10,10,10" Grid.Row="6" Grid.Column="1" Content="Erstellen" FontSize="16" Click="Accept_Click" />
+            <Button x:Name="Abbrechen" Background="Red" Foreground="Black" Margin="10,10,10,10" Grid.Row="6" Grid.Column="2" Content="Abbrechen" FontSize="16" Click="Abbrechen_Click"/>
             <!-- Input -->
-            <TextBox x:Name="subjectName" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" AcceptsReturn="False" Text="Fach" VerticalContentAlignment="Center" FontSize="16" VerticalAlignment="Center" Width="330" Height="40"/>
-            <TextBox x:Name="goalVoteAvg" Grid.Column="1" Grid.Row="2" Margin="31,0,0,0" HorizontalContentAlignment="Center" AcceptsReturn="False" Text="66" VerticalContentAlignment="Center" FontSize="16" VerticalAlignment="Center" Width="100" Height="40"/>
-            <TextBox x:Name="goalPresentation" Grid.Column="1" Grid.Row="3" Margin="31,0,0,0" AcceptsReturn="False" Text="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" Width="100" Height="40"/>
-            <TextBox x:Name="numOfExercises" Grid.Column="1" Grid.Row="4" Margin="31,0,0,0" AcceptsReturn="False" Text="13" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" Width="100" Height="40"/>
+            <TextBox x:Name="subjectName" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Margin="30,0,50,0"  AcceptsReturn="False" Text="Fach" VerticalContentAlignment="Center" FontSize="16"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="40"/>
+            <TextBox x:Name="goalVoteAvg" Grid.Column="1" Grid.Row="2" Margin="30,0,5,0" AcceptsReturn="False" Text="66" HorizontalContentAlignment="Center"   VerticalContentAlignment="Center" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="40"/>
+            <TextBox x:Name="goalPresentation" Grid.Column="1" Grid.Row="3" Margin="30,0,5,0" AcceptsReturn="False" Text="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Stretch"  Height="40"/>
+            <TextBox x:Name="avgOfTasks" Grid.Column="1" Grid.Row="4" Margin="30,0,5,0" AcceptsReturn="False" Text="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="40" />
+            <TextBox x:Name="numOfExercises" Grid.Column="1" Grid.Row="5" Margin="30,0,5,0" AcceptsReturn="False" Text="13" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Stretch"  Height="40"/>
         </Grid>
     </Grid>
 </UserControl>

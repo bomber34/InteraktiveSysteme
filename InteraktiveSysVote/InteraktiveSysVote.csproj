@@ -62,6 +62,12 @@
     <Compile Include="ExercisePanel.xaml.cs">
       <DependentUpon>ExercisePanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ExerciseWindow.xaml.cs">
+      <DependentUpon>ExerciseWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GeneralSubjectOverview.xaml.cs">
+      <DependentUpon>GeneralSubjectOverview.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HomeWindow.xaml.cs">
       <DependentUpon>HomeWindow.xaml</DependentUpon>
     </Compile>
@@ -73,6 +79,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ExercisePanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ExerciseWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GeneralSubjectOverview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

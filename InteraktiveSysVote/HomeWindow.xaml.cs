@@ -25,11 +25,20 @@ namespace InteraktiveSysVote
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Returns back to the main menu
+        /// </summary>
+        public static void ReturnToMainMenu()
+        {
+            MainWindow.mainWindowGrid.Children.RemoveAt(0);
+            MainWindow.mainWindowGrid.Children.Add(MainWindow.homeView);
+        }
+
         private void AddSubjectBtn_Click(object sender, RoutedEventArgs e)
         {
             CreateSubjectWindow createNewSub = new CreateSubjectWindow();
-            MainWindow.mainWindow.Children.RemoveAt(0);
-            MainWindow.mainWindow.Children.Add(createNewSub);
+            MainWindow.mainWindowGrid.Children.RemoveAt(0);
+            MainWindow.mainWindowGrid.Children.Add(createNewSub);
           
         }
 
