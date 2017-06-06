@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:InteraktiveSysVote"
              mc:Ignorable="d" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-    <Border BorderThickness="0,2,0,2" BorderBrush="Black">
+    <Border BorderThickness="0,0,0,2" BorderBrush="Black">
     <Grid Background="White">
         <Label x:Name="exerciseLabel" Content="Übung "  Width="Auto" Height="Auto"/>
         <Grid Margin="0,25,0,0">
