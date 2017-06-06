@@ -39,7 +39,8 @@ namespace InteraktiveSysVote
        
         }
 
-        private void UserControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        ///private void UserControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void OpenExerciseWindowBtn_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.mainWindowGrid.Children.RemoveAt(0);
             MainWindow.mainWindowGrid.Children.Add(exerciseMenu);
