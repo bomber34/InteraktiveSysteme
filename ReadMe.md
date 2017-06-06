@@ -1,1 +1,4 @@
-I have to admit that I have no idea what a good wpf repository should look like ....
+This is the mandatory project for the "Interaktive Systeme" subject.  
+
+We design a simple GUI to help students getting an overview over their necessary votations and presentations.
+You'll be able to create an overview per subject which then tells you how much you have left to do.
