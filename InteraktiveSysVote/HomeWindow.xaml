@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:InteraktiveSysVote"
              mc:Ignorable="d" 
              d:DesignHeight="525" d:DesignWidth="525">
-    <Grid Background="White">
+    <Grid Background="White" HorizontalAlignment="Stretch">
         <!--Options-->
         <DockPanel HorizontalAlignment="Stretch" Height="50" LastChildFill="False" VerticalAlignment="Top" Width="Auto">
             <Button x:Name="addSubjectBtn" Content="+" FontSize="25" Height="50" VerticalAlignment="Top" Width="80" Click="AddSubjectBtn_Click"/>
@@ -14,11 +14,12 @@
             <Button x:Name="deleteSubjectBtn" Content="Löschen" FontSize="20" Height="50" VerticalAlignment="Top" Width="75" Click="DeleteSubjectBtn_Click"/>
         </DockPanel>
         <!--Design Filler -->
-        <Label x:Name="label" Content="Fächer" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" 
-               Margin="0,50,0,0" VerticalAlignment="Top" Height="50" Width="517"
-               Background="Beige" FontSize="30"/>
+        <Label x:Name="label" Content="Fächer" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" 
+               Margin="0,50,0,0" VerticalAlignment="Top" Height="50"
+               Background="Beige" FontSize="30"/> 
+
         <!--SubjectPanels-->
-        <StackPanel x:Name="SubjectStack" HorizontalAlignment="Left" Height="Auto" Margin="0,100,0,0" VerticalAlignment="Top" Width="517"/>
+        <StackPanel x:Name="SubjectStack" HorizontalAlignment="Stretch" Height="Auto" Margin="0,100,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </UserControl>

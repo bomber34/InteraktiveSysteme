@@ -6,10 +6,11 @@
              xmlns:local="clr-namespace:InteraktiveSysVote"
              mc:Ignorable="d" 
              HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-    <Border BorderThickness="0,0,0,2" BorderBrush="Black">
+    <Border BorderThickness="0,0,0,2" HorizontalAlignment="Stretch" BorderBrush="Black">
         <Grid Background="White" Margin="0,0,0,10">
             <!-- Layout -->
             <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
@@ -21,10 +22,11 @@
             </Grid.ColumnDefinitions>
             <!--Content-->
             <!-- 1st Row -->
-            <Label Content="Durchschnitt votierter Aufgaben: " Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20"/>
-            <Label x:Name="AverageVoting" Content="" Grid.Row="0" Grid.Column="3" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="Red" />
+            <Label x:Name="AverageVotedTasks" Content="Durchschnitt votierter Aufgaben: " Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20"/>
 
-            <!-- 2nd Row -->
+            <!-- 2nd Row-->
+            <Label x:Name="AvgToDoInfoLabel" Content="Im Schnitt fehlen noch" Grid.Row="1" Grid.ColumnSpan="4" HorizontalContentAlignment="Center" FontSize="20"/>
+            <!-- 3rd Row -->
             <Label x:Name="NumPresentations" Content="0" Grid.Row="2" Grid.Column="1" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
             <Grid Grid.Row="2" Grid.Column="1">
                 <Grid.RowDefinitions>

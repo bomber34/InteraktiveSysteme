@@ -43,10 +43,12 @@ namespace InteraktiveSysVote
             parentField = parent;
 
             SubjectName.Content = subjectName;
-            generalOverview = new GeneralSubjectOverview()
-            {
-                Height = 175
-            };
+
+            //Remove % of number
+            int goalVote = Int32.Parse(parent.goalVoted.Content.ToString().Remove(parent.goalVoted.Content.ToString().Length-1));
+
+            generalOverview = new GeneralSubjectOverview(goalVote,numExercises, numTasks);
+            generalOverview.Height = 225;
             generalOverview.GoalPresent.Content = minPresent.ToString();
             ExerciseStack.Children.Add(generalOverview);
         }

@@ -5,21 +5,20 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:InteraktiveSysVote"
              
+             HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
              >
-    <!-- mc:Ignorable="d" MouseDoubleClick="UserControl_MouseDoubleClick"-->
-    <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+    <Border BorderThickness="0,0,0,1" BorderBrush="Black" HorizontalAlignment="Stretch">
 
-        <Grid>
-            <!-- Name of Subject -->
-
+        <Grid Background="White">
             <Label x:Name="Fach" Background="White" Height="Auto" Width="300" FontSize="16"/>
             <Button x:Name="OpenExerciseWindowBtn" Content="Button" Width="45" Height="16" Opacity="0"/>
 
 
             <!-- Important Subject Information -->
-            <Grid Margin="0,20,0,0">
+            <Grid HorizontalAlignment="Stretch" Margin="0,20,0,0">
                 <!-- Layout -->
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
@@ -32,10 +31,12 @@
                 </Grid.ColumnDefinitions>
 
                 <!--Static Content-->
-                <Label Grid.Row="0" Grid.Column="0" Content="Votiert:"/>
-                <Label Grid.Row="1" Grid.Column="0" Content="Vorträge:"/>
-                <Label Grid.Row="0" Grid.Column="2" HorizontalContentAlignment="Center" Content="benötigt:"/>
-                <Label Grid.Row="1" Grid.Column="2" HorizontalContentAlignment="Center" Content="von"/>
+                <!-- Name of Subject -->
+                <Label x:Name="Fach" Background="White" Content="Fach " Grid.Row="0" Grid.Column="0" FontSize="20" Height="Auto"/>
+                <Label Grid.Row="1" Grid.Column="0" Content="Votiert:" FontSize="20"/>
+                <Label Grid.Row="2" Grid.Column="0" Content="Vorträge:" FontSize="20"/>
+                <Label Grid.Row="1" Grid.Column="2" HorizontalContentAlignment="Center" Content="benötigt:" FontSize="20"/>
+                <Label Grid.Row="2" Grid.Column="2" HorizontalContentAlignment="Center" Content="von" FontSize="20"/>
                 <!--Changable Content-->
                 <Label x:Name="avgVoted" Content="0%" Foreground="Red" HorizontalContentAlignment="Right" Grid.Row="0" Grid.Column="1" />
                 <Label x:Name="presented" Content="0" HorizontalContentAlignment="Right" Grid.Row="1" Grid.Column="1"/>
