@@ -21,7 +21,6 @@ namespace InteraktiveSysVote
     public partial class GeneralSubjectOverview : UserControl
     {
         private int expectedAssignments, avgExpectedTasks, avgVoteGoal;
-        string avgToDoInfo;
         double avgTasksToDo;
 
         public GeneralSubjectOverview()
@@ -40,14 +39,38 @@ namespace InteraktiveSysVote
             double allTasks = (double) (expectedAssignments * avgExpectedTasks);
             avgTasksToDo = (allTasks / 100.0) * (double)averageVoteGoal;
             avgTasksToDo = avgTasksToDo / (double) expectedAssignments;
+            avgTasksToDo = RoundTo2DecimalPoints(avgTasksToDo);
 
-            // Cut down to only 2 decimals
-            avgTasksToDo *= 100.0;
-            int toDo = (int)Math.Round(avgTasksToDo);
-            avgTasksToDo = (double)toDo / 100.0;
-            avgToDoInfo = "Im Schnitt fehlen noch " + avgTasksToDo.ToString() + " Aufgaben";
-            AvgToDoInfoLabel.Content = avgToDoInfo;
+            if (avgTasksToDo == 1.00)
+                AvgToDoInfoLabel.Content = "Im Schnitt fehlt noch " + avgTasksToDo + " Aufgabe pro Übung";
+
+            else
+                AvgToDoInfoLabel.Content = "Im Schnitt fehlen noch " + avgTasksToDo + " Aufgaben pro Übung";
+          
          
+        }
+
+        /// <summary>
+        /// Takes a double and rounds it to the 2nd decimal point
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static double RoundTo2DecimalPoints(double value)
+        {
+            value *= 100.0;
+            int integerVal = (int)value;
+            value = (double)integerVal / 100.0;
+            return value;
+        }
+
+        public void SetAverageTasksLeftToDoLabel(double value)
+        {
+            if (value == 1.00)
+                AvgToDoInfoLabel.Content = "Im Schnitt fehlt noch " + value + " Aufgabe pro Übung";
+
+            else
+                AvgToDoInfoLabel.Content = "Im Schnitt fehlen noch " + value + " Aufgaben pro Übung";
+
         }
 
         private void PresentUp_Click(object sender, RoutedEventArgs e)

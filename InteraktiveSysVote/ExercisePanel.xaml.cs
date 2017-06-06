@@ -23,18 +23,21 @@ namespace InteraktiveSysVote
     {
         public int DoneTasks { get; set; }
         public int TotalTasks { get; set; }
+        private ExerciseWindow parentField;
 
         public ExercisePanel()
         {
             InitializeComponent();
         }
 
-        public ExercisePanel(int allTasks)
+        public ExercisePanel(ExerciseWindow parent, int allTasks)
         {
             InitializeComponent();
             DoneTasks = 0;
             TotalTasksLabel.Content = allTasks.ToString();
             TotalTasks = allTasks;
+
+            parentField = parent;
         }
         
         /// <summary>
@@ -64,6 +67,8 @@ namespace InteraktiveSysVote
                 TotalTasksLabel.Content = VotedTasksLabel.Content;
                 TotalTasks = DoneTasks;
             }
+
+            parentField.CalculatedAverageLeftToDo();
               
         }
 
@@ -97,6 +102,8 @@ namespace InteraktiveSysVote
                 VotedTasksLabel.Content = TotalTasksLabel.Content;
                 DoneTasks = TotalTasks;
             }
+
+            parentField.CalculatedAverageLeftToDo();
         }
     }
 }

@@ -21,7 +21,7 @@ namespace InteraktiveSysVote
     public partial class ExerciseWindow : UserControl
     {
         private string subjectName;
-        private int goalPresent, numberOfTasks, numberOfAssignements;
+        private int goalPresent, goalVote,numberOfTasks, numberOfAssignements, currentNumOfAssignments, originalNumAssigns;
         private SubjectPanel parentField;
         private GeneralSubjectOverview generalOverview;
 
@@ -30,7 +30,7 @@ namespace InteraktiveSysVote
             InitializeComponent();
         }
 
-        public ExerciseWindow(SubjectPanel parent, string name, int minPresent, int numTasks, int numExercises)
+        public ExerciseWindow(SubjectPanel parent, string name,int minVote ,int minPresent, int numTasks, int numExercises)
         {
             InitializeComponent();
 
@@ -39,29 +39,42 @@ namespace InteraktiveSysVote
             goalPresent = minPresent;
             numberOfTasks = numTasks;
             numberOfAssignements = numExercises;
+            originalNumAssigns = numberOfAssignements;
+            currentNumOfAssignments = 0;
+            goalVote = minVote;
 
             parentField = parent;
 
             SubjectName.Content = subjectName;
 
-            //Remove % of number
-            int goalVote = Int32.Parse(parent.goalVoted.Content.ToString().Remove(parent.goalVoted.Content.ToString().Length-1));
-
             generalOverview = new GeneralSubjectOverview(goalVote,numExercises, numTasks);
             generalOverview.Height = 225;
             generalOverview.GoalPresent.Content = minPresent.ToString();
+            
+            //Workaround to place the overview perfectly into the window
             ExerciseStack.Children.Add(generalOverview);
         }
 
-        private int AverageVoted()
+        /// <summary>
+        /// Gets the sums of all voted and total Tasks fields in all exercisePanels
+        /// </summary>
+        /// <param name="totalDone"></param>
+        /// <param name="totalAll"></param>
+        private void GetTasksDoneAndTotal(out int totalDone, out int totalAll)
         {
-            int totalDone = 0, totalAll = 0;
-            foreach(ExercisePanel exer in ExerciseStack.Children.OfType<ExercisePanel>())
+            totalDone = 0;
+            totalAll = 0;
+            foreach (ExercisePanel exer in ExerciseStack.Children.OfType<ExercisePanel>())
             {
                 totalDone += exer.DoneTasks;
                 totalAll += exer.TotalTasks;
             }
+        }
 
+        private int AverageVoted()
+        {
+            GetTasksDoneAndTotal(out int totalDone, out int totalAll);
+            
             //Prevent dividing by 0 later on
             if (totalDone == 0 && totalAll == 0)
                 return 0;
@@ -74,8 +87,15 @@ namespace InteraktiveSysVote
 
         private void DeleteExerciseBtn_Click(object sender, RoutedEventArgs e)
         {
+            //The first element is the general overview
             if (ExerciseStack.Children.Count > 1)
+            {
                 ExerciseStack.Children.RemoveAt(ExerciseStack.Children.Count - 1);
+                currentNumOfAssignments--;
+
+                if (currentNumOfAssignments <= originalNumAssigns)
+                    numberOfAssignements = originalNumAssigns;
+            }
         }
 
         private void HomeBtn_Click(object sender, RoutedEventArgs e)
@@ -91,8 +111,33 @@ namespace InteraktiveSysVote
 
         private void AddExerciseBtn_Click(object sender, RoutedEventArgs e)
         {
-            ExercisePanel exercise = new ExercisePanel(numberOfTasks);
+            ExercisePanel exercise = new ExercisePanel(this, numberOfTasks);
             ExerciseStack.Children.Add(exercise);
+            currentNumOfAssignments++;
+
+            if (currentNumOfAssignments > numberOfAssignements)
+                numberOfAssignements = currentNumOfAssignments;
+        }
+
+        /// <summary>
+        /// Calculates the amount of remaining to do tasks per assignment
+        /// </summary>
+        public void CalculatedAverageLeftToDo()
+        {
+            int assignmentsLeft = (numberOfAssignements - currentNumOfAssignments);
+            int totalLeftTasks = numberOfTasks * assignmentsLeft;
+            GetTasksDoneAndTotal(out int totalDone, out int currentTotalTasks);
+            int allTasks = totalLeftTasks + currentTotalTasks;
+            int leftToDo = (int)Math.Ceiling((((double)(allTasks) / 100.0)*(double)goalVote)) - totalDone;
+
+            if (assignmentsLeft != 0)
+            {
+                double tasksPerWeek = (double)leftToDo / (double)assignmentsLeft;
+                tasksPerWeek = GeneralSubjectOverview.RoundTo2DecimalPoints(tasksPerWeek);
+                generalOverview.SetAverageTasksLeftToDoLabel(tasksPerWeek);
+            }
+            else
+                generalOverview.AvgToDoInfoLabel.Content = "Alle Übungen sind vorbei";
         }
     }
 }
