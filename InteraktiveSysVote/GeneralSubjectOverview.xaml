@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:InteraktiveSysVote"
              mc:Ignorable="d" 
              HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-    <Border BorderThickness="0,0,0,2" BorderBrush="Black">
+    <Border BorderThickness="0,0,0,2" HorizontalAlignment="Stretch" BorderBrush="Black">
         <Grid Background="White" Margin="0,0,0,10">
             <!-- Layout -->
             <Grid.RowDefinitions>

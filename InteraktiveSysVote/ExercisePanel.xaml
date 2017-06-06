@@ -30,8 +30,8 @@
                 <Button x:Name="incTotal" Content="▲" Margin="20,0,20,0" HorizontalContentAlignment="Center" Grid.Column="3" Grid.Row="0" Click="ButtonUp_Click"/>
                 <Button x:Name="decTotal" Content="▼" Margin="20,0,20,0" HorizontalContentAlignment="Center" Grid.Column="3" Grid.Row="2" Click="ButtonDown_Click"/>
             <!-- changable Content -->
-                <TextBox x:Name="VotedTasksTextBox" HorizontalContentAlignment="Center" AcceptsReturn="False" Margin="20,0,20,0" PreviewTextInput="TextBox_PreviewTextInput" Grid.Column="1" Grid.Row="1" Text="0" />
-                <TextBox x:Name="TotalTasksTextBox" HorizontalContentAlignment="Center" AcceptsReturn="False"  Margin="20,0,20,0"  PreviewTextInput="TextBox_PreviewTextInput" Grid.Column="3" Grid.Row="1" Text="5" />
+                <Label x:Name="VotedTasksLabel" HorizontalContentAlignment="Center" Margin="20,0,20,0"  Grid.Column="1" Grid.Row="1" Content="0" />
+                <Label x:Name="TotalTasksLabel" HorizontalContentAlignment="Center" Margin="20,0,20,0"  Grid.Column="3" Grid.Row="1" Content="5" />
               <!--  <Label x:Name="Debug" Content="Hallo" Grid.Row="0" Grid.Column="0" /> -->
             </Grid>
     </Grid>
