@@ -81,6 +81,10 @@ namespace InteraktiveSysVote
         private void HomeBtn_Click(object sender, RoutedEventArgs e)
         {
             parentField.avgVoted.Content = AverageVoted().ToString()+"%";
+
+            if (Int32.Parse(parentField.avgVoted.Content.ToString().Remove(parentField.avgVoted.Content.ToString().Length-1)) >= (Int32.Parse(parentField.goalVoted.Content.ToString().Remove(parentField.goalVoted.Content.ToString().Length - 1))))
+                parentField.avgVoted.Foreground = new SolidColorBrush(Colors.Black);
+
             parentField.presented.Content = generalOverview.NumPresentations.Content;
             HomeWindow.ReturnToMainMenu();
         }

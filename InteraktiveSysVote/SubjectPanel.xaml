@@ -9,8 +9,10 @@
              >
     <Border BorderThickness="0,0,0,1" BorderBrush="Black" HorizontalAlignment="Stretch">
 
-        <Grid HorizontalAlignment="Stretch" Background="White">
-            
+        <Grid>
+            <!-- Name of Subject -->
+            <Label x:Name="Fach" Background="White" Content="Fach " Height="Auto" Width="300" FontSize="16"/>
+
             <!-- Important Subject Information -->
             <Grid HorizontalAlignment="Stretch" Margin="0,20,0,0">
                 <!-- Layout -->
@@ -35,10 +37,10 @@
                 <Label Grid.Row="1" Grid.Column="2" HorizontalContentAlignment="Center" Content="benötigt:" FontSize="20"/>
                 <Label Grid.Row="2" Grid.Column="2" HorizontalContentAlignment="Center" Content="von" FontSize="20"/>
                 <!--Changable Content-->
-                <Label x:Name="avgVoted" Content="0%" HorizontalContentAlignment="Right" Grid.Row="1" Grid.Column="1" FontSize="20"/>
-                <Label x:Name="presented" Content="0" HorizontalContentAlignment="Right" Grid.Row="2" Grid.Column="1" FontSize="20"/>
-                <Label x:Name="goalVoted" Content="66" HorizontalContentAlignment="Left" Grid.Row="1" Grid.Column="3" FontSize="20"/>
-                <Label x:Name="GoalPresent" Content="2" HorizontalContentAlignment="Left" Grid.Row="2" Grid.Column="3" FontSize="20"/>
+                <Label x:Name="avgVoted" Content="0%" Foreground="Red" HorizontalContentAlignment="Right" Grid.Row="0" Grid.Column="1" />
+                <Label x:Name="presented" Content="0" HorizontalContentAlignment="Right" Grid.Row="1" Grid.Column="1"/>
+                <Label x:Name="goalVoted" Content="66%" HorizontalContentAlignment="Left" Grid.Row="0" Grid.Column="3"/>
+                <Label x:Name="GoalPresent" Content="2" HorizontalContentAlignment="Left" Grid.Row="1" Grid.Column="3"/>
             </Grid>
         </Grid>
     </Border>
