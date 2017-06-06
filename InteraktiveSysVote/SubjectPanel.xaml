@@ -9,10 +9,7 @@
              >
     <Border BorderThickness="0,0,0,1" BorderBrush="Black" HorizontalAlignment="Stretch">
 
-        <Grid>
-            <!-- Name of Subject -->
-            <Label x:Name="Fach" Background="White" Content="Fach " Height="Auto" Width="300" FontSize="16"/>
-
+        <Grid Background="White">
             <!-- Important Subject Information -->
             <Grid HorizontalAlignment="Stretch" Margin="0,20,0,0">
                 <!-- Layout -->
