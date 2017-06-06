@@ -31,7 +31,7 @@ namespace InteraktiveSysVote
         {
             InitializeComponent();
             Fach.Content = subjectName;
-            goalVoted.Content = avgVoteGoal.ToString();
+            goalVoted.Content = avgVoteGoal.ToString()+"%";
             GoalPresent.Content = minPresent.ToString();
 
             

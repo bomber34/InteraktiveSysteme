@@ -78,7 +78,7 @@ namespace InteraktiveSysVote
 
         private void HomeBtn_Click(object sender, RoutedEventArgs e)
         {
-            parentField.avgVoted.Content = AverageVoted().ToString();
+            parentField.avgVoted.Content = AverageVoted().ToString()+"%";
             parentField.presented.Content = generalOverview.NumPresentations.Content;
             HomeWindow.ReturnToMainMenu();
         }
