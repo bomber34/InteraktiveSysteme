@@ -34,7 +34,6 @@ namespace InteraktiveSysVote
             goalVoted.Content = avgVoteGoal.ToString()+"%";
             GoalPresent.Content = minPresent.ToString();
 
-
             exerciseMenu = new ExerciseWindow(this, subjectName, avgVoteGoal ,minPresent, numOfTasks , numOfExercises);
             
         }

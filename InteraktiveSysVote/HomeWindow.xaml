@@ -9,7 +9,7 @@
     <DockPanel Background="White" HorizontalAlignment="Stretch">
         <!--Options-->
         <DockPanel DockPanel.Dock="Top" HorizontalAlignment="Stretch" Height="50" LastChildFill="False" VerticalAlignment="Top" Width="Auto">
-            <Button x:Name="addSubjectBtn" Content="+" FontSize="25" Height="50" VerticalAlignment="Top" Width="80" Click="AddSubjectBtn_Click"/>
+            <Button x:Name="addSubjectBtn"  Content="+" FontSize="25" Height="50" VerticalAlignment="Top" Width="80" Click="AddSubjectBtn_Click"/>
         </DockPanel>
         <!--Design Filler -->
         <Label x:Name="label" DockPanel.Dock="Top" Content="Fächer" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" 

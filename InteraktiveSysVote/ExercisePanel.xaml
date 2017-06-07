@@ -8,7 +8,7 @@
     <Border BorderThickness="0,0,0,2" BorderBrush="Black">
     <Grid Background="White">
         <Label x:Name="ExerciseLabel" Content="Übung "  Width="Auto" Height="Auto"/>
-        <Grid Margin="0,25,0,0">
+        <Grid Margin="0,25,0,25">
             <!-- Grid Design -->
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
