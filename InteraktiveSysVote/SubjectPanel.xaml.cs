@@ -30,11 +30,10 @@ namespace InteraktiveSysVote
         public SubjectPanel(string subjectName, int avgVoteGoal, int minPresent, int numOfTasks, int numOfExercises)
         {
             InitializeComponent();
-            Fach.Content = subjectName;
+            OpenExerciseWindowBtn.Content = subjectName;
             goalVoted.Content = avgVoteGoal.ToString()+"%";
             GoalPresent.Content = minPresent.ToString();
 
-            OpenExerciseWindowBtn.Content = "ABC";
 
             exerciseMenu = new ExerciseWindow(this, subjectName, avgVoteGoal ,minPresent, numOfTasks , numOfExercises);
             

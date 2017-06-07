@@ -29,8 +29,6 @@
 
                 <!--Static Content-->
                 <!-- Name of Subject -->
-                <Label x:Name="Fach" Background="White" Content="Fach " Grid.Row="0" Grid.Column="0" FontSize="20" Height="Auto"/>
-                <Button x:Name="OpenExerciseWindowBtn" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Button" Grid.Row="0" Grid.Column="0" Width="AUTO" Height="AUTO" Opacity="0" Click="OpenExerciseWindowBtn_Click"/>
                 <Label Grid.Row="1" Grid.Column="0" Content="Votiert:" FontSize="20"/>
                 <Label Grid.Row="2" Grid.Column="0" Content="Vorträge:" FontSize="20"/>
                 <Label Grid.Row="1" Grid.Column="2" HorizontalContentAlignment="Center" Content="benötigt:" FontSize="20"/>
@@ -40,8 +38,11 @@
                 <Label x:Name="presented" Content="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="2" Grid.Column="1"/>
                 <Label x:Name="goalVoted" Content="66%" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="1" Grid.Column="3"/>
                 <Label x:Name="GoalPresent" Content="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="2" Grid.Column="3"/>
-                <Button x:Name="editSubjectBtn" Content="EDIT" Grid.Column="1" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Click="EditSubjectBtn_Click" Grid.ColumnSpan="2" Margin="0,10,0,0"/>
-                <Button x:Name="deleteSubjectBtn" Content="Löschen" Grid.Column="2" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Click="DeleteSubjectBtn_Click" Grid.ColumnSpan="2" Margin="0,10,0,0"/>
+                <!-- Buttons -->
+                <Button x:Name="editSubjectBtn" FontSize="20" BorderBrush="LightGray" Background="White" Content="EDIT" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="75" Click="EditSubjectBtn_Click" Grid.ColumnSpan="2"/>
+                <Button x:Name="deleteSubjectBtn" FontSize="20" BorderBrush="LightGray" Background="White" Content="Löschen" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="75" Click="DeleteSubjectBtn_Click" Grid.ColumnSpan="2"/>
+                <Button x:Name="OpenExerciseWindowBtn" FontSize="20" BorderBrush="LightGray" Background="White" Content="Fach" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="OpenExerciseWindowBtn_Click" Height="Auto" HorizontalContentAlignment="Stretch"/>
+
             </Grid>
         </Grid>
     </Border>
