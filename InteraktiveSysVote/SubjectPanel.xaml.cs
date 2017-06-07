@@ -39,7 +39,15 @@ namespace InteraktiveSysVote
             exerciseMenu = new ExerciseWindow(this, subjectName, avgVoteGoal ,minPresent, numOfTasks , numOfExercises);
             
         }
+        private void EditSubjectBtn_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO implement  
+        }
 
+        private void DeleteSubjectBtn_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO implement            
+        }
 
         ///private void UserControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         private void OpenExerciseWindowBtn_Click(object sender, RoutedEventArgs e)
