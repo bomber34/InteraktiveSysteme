@@ -23,6 +23,8 @@ namespace InteraktiveSysVote
         private string subjectName;
         private int goalPresent, goalVote,numberOfTasks, numberOfAssignements, currentNumOfAssignments, originalNumAssigns;
         private SubjectPanel parentField;
+        private ScrollViewer ExerciseWindowScrollViewer;
+        private StackPanel ExerciseStackPanel;
         private GeneralSubjectOverview generalOverview;
 
         public ExerciseWindow()
@@ -42,17 +44,31 @@ namespace InteraktiveSysVote
             originalNumAssigns = numberOfAssignements;
             currentNumOfAssignments = 0;
             goalVote = minVote;
-
             parentField = parent;
 
+            //Set Label Content
             SubjectName.Content = subjectName;
 
-            generalOverview = new GeneralSubjectOverview(goalVote,numExercises, numTasks);
-            generalOverview.Height = 225;
+            //GeneralOverview
+            generalOverview = new GeneralSubjectOverview(goalVote, numExercises, numTasks);
             generalOverview.GoalPresent.Content = minPresent.ToString();
-            
-            //Workaround to place the overview perfectly into the window
-            ExerciseStack.Children.Add(generalOverview);
+
+            //Add generalOverview to DockPanel
+            DockPanel.SetDock(generalOverview, Dock.Top);
+            MainExerciseWindowDockPanel.Children.Add(generalOverview);
+
+            //Initialize dynamic Content
+            ExerciseWindowScrollViewer = new ScrollViewer()
+            {
+                VerticalScrollBarVisibility = ScrollBarVisibility.Auto
+            };
+            //Add ScrollViewer to DockPanel
+            DockPanel.SetDock(ExerciseWindowScrollViewer, Dock.Top);
+            MainExerciseWindowDockPanel.Children.Add(ExerciseWindowScrollViewer);
+
+            //Create StackPanel for the Assignments
+            ExerciseStackPanel = new StackPanel();
+            ExerciseWindowScrollViewer.Content = ExerciseStackPanel;
         }
 
         /// <summary>
@@ -64,7 +80,7 @@ namespace InteraktiveSysVote
         {
             totalDone = 0;
             totalAll = 0;
-            foreach (ExercisePanel exer in ExerciseStack.Children.OfType<ExercisePanel>())
+            foreach (ExercisePanel exer in ExerciseStackPanel.Children.OfType<ExercisePanel>())
             {
                 totalDone += exer.DoneTasks;
                 totalAll += exer.TotalTasks;
@@ -88,13 +104,15 @@ namespace InteraktiveSysVote
         private void DeleteExerciseBtn_Click(object sender, RoutedEventArgs e)
         {
             //The first element is the general overview
-            if (ExerciseStack.Children.Count > 1)
+            if (ExerciseStackPanel.Children.Count > 0)
             {
-                ExerciseStack.Children.RemoveAt(ExerciseStack.Children.Count - 1);
+                ExerciseStackPanel.Children.RemoveAt(ExerciseStackPanel.Children.Count - 1);
                 currentNumOfAssignments--;
 
                 if (currentNumOfAssignments <= originalNumAssigns)
                     numberOfAssignements = originalNumAssigns;
+
+                CalculatedAverageLeftToDo();
             }
         }
 
@@ -113,7 +131,7 @@ namespace InteraktiveSysVote
         {
             currentNumOfAssignments++;
             ExercisePanel exercise = new ExercisePanel(this, numberOfTasks, currentNumOfAssignments);
-            ExerciseStack.Children.Add(exercise);
+            ExerciseStackPanel.Children.Add(exercise);
             
             if (currentNumOfAssignments > numberOfAssignements)
                 numberOfAssignements = currentNumOfAssignments;

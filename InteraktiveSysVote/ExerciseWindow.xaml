@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:InteraktiveSysVote"
              mc:Ignorable="d" 
 d:DesignHeight="525" d:DesignWidth="525">
-    <DockPanel x:Name="MainDockPanel" Background="White">
+    <DockPanel x:Name="MainExerciseWindowDockPanel" Background="White">
         <!--Options-->
         <DockPanel DockPanel.Dock="Top" HorizontalAlignment="Stretch" Height="50" LastChildFill="False" VerticalAlignment="Top" Width="Auto">
             <Button x:Name="HomeBtn" Content="Home" FontSize="25" VerticalAlignment="Stretch"  Width="80" Click="HomeBtn_Click"/>
@@ -17,9 +17,10 @@ d:DesignHeight="525" d:DesignWidth="525">
         <Label x:Name="SubjectName" DockPanel.Dock="Top" Content="Fachname" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" 
                VerticalAlignment="Top" Height="50"
                Background="Beige" FontSize="30"/>
-        <!--SubjectPanels-->
-        <ScrollViewer VerticalScrollBarVisibility="Auto" DockPanel.Dock="Top">
+        <!--SubjectPanels
+        <ScrollViewer x:Name="ExerciseWindowScrollViewer" VerticalScrollBarVisibility="Auto" DockPanel.Dock="Top">
             <StackPanel x:Name="ExerciseStack" HorizontalAlignment="Stretch"/>
         </ScrollViewer>
+        -->
     </DockPanel>
 </UserControl>

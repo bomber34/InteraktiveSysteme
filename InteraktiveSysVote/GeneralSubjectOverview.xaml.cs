@@ -31,6 +31,7 @@ namespace InteraktiveSysVote
         public GeneralSubjectOverview(int averageVoteGoal,int numOfAssignements, int averageExpectedTasks)
         {
             InitializeComponent();
+           
             expectedAssignments = numOfAssignements;
             avgExpectedTasks = averageExpectedTasks;
             avgVoteGoal = averageVoteGoal;

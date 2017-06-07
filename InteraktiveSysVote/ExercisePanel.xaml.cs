@@ -30,7 +30,7 @@ namespace InteraktiveSysVote
             InitializeComponent();
         }
 
-        public ExercisePanel(ExerciseWindow parent,int currentAssignment ,int allTasks)
+        public ExercisePanel(ExerciseWindow parent,int allTasks, int currentAssignment)
         {
             InitializeComponent();
             DoneTasks = 0;
