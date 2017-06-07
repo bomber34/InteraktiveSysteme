@@ -42,14 +42,5 @@ namespace InteraktiveSysVote
           
         }
 
-        private void DeleteSubjectBtn_Click(object sender, RoutedEventArgs e)
-        {
-            // TODO implement            
-        }
-
-        private void EditSubjectBtn_Click(object sender, RoutedEventArgs e)
-        {
-            // TODO implement  
-        }
     }
 }
