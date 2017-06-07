@@ -6,19 +6,20 @@
              xmlns:local="clr-namespace:InteraktiveSysVote"
              mc:Ignorable="d" 
 d:DesignHeight="525" d:DesignWidth="525">
-    <Grid Background="White">
+    <DockPanel x:Name="MainDockPanel" Background="White">
         <!--Options-->
-        <DockPanel HorizontalAlignment="Stretch" Height="50" LastChildFill="False" VerticalAlignment="Top" Width="Auto">
+        <DockPanel DockPanel.Dock="Top" HorizontalAlignment="Stretch" Height="50" LastChildFill="False" VerticalAlignment="Top" Width="Auto">
             <Button x:Name="HomeBtn" Content="Home" FontSize="25" VerticalAlignment="Stretch"  Width="80" Click="HomeBtn_Click"/>
             <Button x:Name="AddExerciseBtn" Content="+" FontSize="25" VerticalAlignment="Stretch" Width="80" Click="AddExerciseBtn_Click"/>
             <Button x:Name="DeleteExerciseBtn" Content="Löschen" FontSize="20" VerticalAlignment="Stretch" Width="75" Click="DeleteExerciseBtn_Click"/>
         </DockPanel>
         <!--Design Filler -->
-        <Label x:Name="SubjectName" Content="Fachname" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" 
-               Margin="0,50,0,0" VerticalAlignment="Top" Height="50"
+        <Label x:Name="SubjectName" DockPanel.Dock="Top" Content="Fachname" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" 
+               VerticalAlignment="Top" Height="50"
                Background="Beige" FontSize="30"/>
         <!--SubjectPanels-->
-        <StackPanel x:Name="ExerciseStack" HorizontalAlignment="Stretch" Margin="0,100,0,0" VerticalAlignment="Top">
-        </StackPanel>
-    </Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" DockPanel.Dock="Top">
+            <StackPanel x:Name="ExerciseStack" HorizontalAlignment="Stretch"/>
+        </ScrollViewer>
+    </DockPanel>
 </UserControl>

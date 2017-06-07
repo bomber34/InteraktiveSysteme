@@ -37,8 +37,9 @@ namespace InteraktiveSysVote
             OpenExerciseWindowBtn.Content = "ABC";
 
             exerciseMenu = new ExerciseWindow(this, subjectName, avgVoteGoal ,minPresent, numOfTasks , numOfExercises);
-       
+            
         }
+
 
         ///private void UserControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         private void OpenExerciseWindowBtn_Click(object sender, RoutedEventArgs e)
