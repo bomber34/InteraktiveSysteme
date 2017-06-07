@@ -111,12 +111,14 @@ namespace InteraktiveSysVote
 
         private void AddExerciseBtn_Click(object sender, RoutedEventArgs e)
         {
-            ExercisePanel exercise = new ExercisePanel(this, numberOfTasks);
-            ExerciseStack.Children.Add(exercise);
             currentNumOfAssignments++;
-
+            ExercisePanel exercise = new ExercisePanel(this, numberOfTasks, currentNumOfAssignments);
+            ExerciseStack.Children.Add(exercise);
+            
             if (currentNumOfAssignments > numberOfAssignements)
                 numberOfAssignements = currentNumOfAssignments;
+
+            CalculatedAverageLeftToDo();
         }
 
         /// <summary>

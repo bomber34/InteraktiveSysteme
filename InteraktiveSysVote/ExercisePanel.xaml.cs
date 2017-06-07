@@ -30,12 +30,14 @@ namespace InteraktiveSysVote
             InitializeComponent();
         }
 
-        public ExercisePanel(ExerciseWindow parent, int allTasks)
+        public ExercisePanel(ExerciseWindow parent,int currentAssignment ,int allTasks)
         {
             InitializeComponent();
             DoneTasks = 0;
             TotalTasksLabel.Content = allTasks.ToString();
             TotalTasks = allTasks;
+
+            ExerciseLabel.Content = ExerciseLabel.Content + currentAssignment.ToString();
 
             parentField = parent;
         }
