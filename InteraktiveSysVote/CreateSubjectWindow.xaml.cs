@@ -59,6 +59,12 @@ namespace InteraktiveSysVote
                 parsedAll = false;
             }
 
+            if(goalVote > 100 ||goalVote <0)
+            {
+                GoalVoteInputError.Content = "Nur Zahlen zwischen 0 und 100 erlaubt";
+                parsedAll = false;
+            }
+
             return parsedAll;
         }
 
