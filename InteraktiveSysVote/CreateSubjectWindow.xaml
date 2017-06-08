@@ -37,6 +37,7 @@
             <Label Content="Anzahl Aufgaben&#x0a;    pro Übung:" Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="0" FontSize="16" VerticalContentAlignment="Center"/>
             <Label Content="Anzahl Übungen:" Grid.Row="5" Grid.Column="0" FontSize="16" VerticalContentAlignment="Center"/>
             <!-- Error Labels -->
+            <Label x:Name="NameInputError" Content="" Grid.Row="1" Grid.Column="4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="Red" FontSize="16" />
             <Label x:Name="GoalVoteInputError" Content="" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="16" Foreground="Red" />
             <Label x:Name="MinimumPresentationInputError" Content="" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="16" Foreground="Red" />
             <Label x:Name="TaskAmountInputError" Content="" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="16" Foreground="Red" />
