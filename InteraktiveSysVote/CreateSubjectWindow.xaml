@@ -30,8 +30,8 @@
             <!-- Labels -->
             <Label Content="Fach erstellen" Grid.ColumnSpan="4" Background="Beige" FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
             <Label Content="Name: " Grid.Row="1" Grid.Column="0" FontSize="16" VerticalContentAlignment="Center" />
-            <Label Content="Mindestschnitt:" Grid.Row="2" Grid.Column="0" FontSize="16" VerticalContentAlignment="Center" />
-            <Label Content="%" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Grid.Row="2" Grid.Column="2" FontSize="16"/>
+            <Label Content="Mindestschnitt in %:" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" FontSize="16" VerticalContentAlignment="Center" />
+           <!-- miep --> <Label Content="%" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="2" Grid.Column="1" FontSize="16"/>
             <Label Content="Mindestvorträge:" Grid.Row="3" Grid.Column="0" FontSize="16" VerticalContentAlignment="Center"/>
             <!-- &#x0a is a hex code for a new line-->
             <Label Content="Anzahl Aufgaben&#x0a;    pro Übung:" Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="0" FontSize="16" VerticalContentAlignment="Center"/>
@@ -46,7 +46,7 @@
             <Button x:Name="accept" Background="Green" Foreground="White" Margin="10,10,10,10" Grid.Row="6" Grid.Column="1" Content="Erstellen" FontSize="16" Click="Accept_Click" />
             <Button x:Name="Abbrechen" Background="Red" Foreground="Black" Margin="10,10,10,10" Grid.Row="6" Grid.Column="2" Content="Abbrechen" FontSize="16" Click="Abbrechen_Click"/>
             <!-- Input -->
-            <TextBox x:Name="subjectName" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Margin="30,0,50,0"  AcceptsReturn="False" Text="Fach" VerticalContentAlignment="Center" FontSize="16"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="40"/>
+            <TextBox x:Name="subjectName" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="30,0,30,0"  AcceptsReturn="False" Text="Fach" VerticalContentAlignment="Center" FontSize="16"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="40"/>
             <TextBox x:Name="goalVoteAvg" Grid.Column="1" Grid.Row="2" Margin="30,0,5,0" AcceptsReturn="False" Text="66" HorizontalContentAlignment="Center"   VerticalContentAlignment="Center" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="40"/>
             <TextBox x:Name="goalPresentation" Grid.Column="1" Grid.Row="3" Margin="30,0,5,0" AcceptsReturn="False" Text="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Stretch"  Height="40"/>
             <TextBox x:Name="avgOfTasks" Grid.Column="1" Grid.Row="4" Margin="30,0,5,0" AcceptsReturn="False" Text="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="40" />
