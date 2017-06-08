@@ -47,8 +47,6 @@ namespace InteraktiveSysVote
 
             else
                 AvgToDoInfoLabel.Content = "Im Schnitt fehlen noch " + avgTasksToDo + " Aufgaben pro Übung";
-          
-            // TODO Change design so that it fits perfectly
         }
 
         /// <summary>

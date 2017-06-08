@@ -43,40 +43,86 @@ namespace InteraktiveSysVote
         /// <param name="goalPresent"></param>
         /// <param name="assignements"></param>
         /// <returns></returns>
-        private bool TryParsingFields(out int goalVote, out int goalPresent,out int avgNumTasks ,out int assignements)
+        private bool TryParsingFields(string name, out int goalVote, out int goalPresent,out int avgNumTasks ,out int assignements)
         {
             bool parsedAll = true; //If one field fails, this will be set to false
             if(!Int32.TryParse(goalVoteAvg.Text,out goalVote))
             {
                 GoalVoteInputError.Content = "Nur natürliche Zahlen erlaubt";
+                goalVote = 0;
                 parsedAll = false;
             }
 
             if (!Int32.TryParse(avgOfTasks.Text, out avgNumTasks))
             {
                 TaskAmountInputError.Content = "Nur natürliche Zahlen erlaubt";
+                avgNumTasks = 0;
                 parsedAll = false;
             }
 
             if (!Int32.TryParse(goalPresentation.Text, out goalPresent))
             {
                 MinimumPresentationInputError.Content = "Nur natürliche Zahlen erlaubt";
+                goalPresent = 0;
                 parsedAll = false;
             }
 
             if(!Int32.TryParse(numOfExercises.Text, out assignements))
             {
                 ExerciseAmountInputError.Content = "Nur natürliche Zahlen erlaubt";
+                assignements = 0;
                 parsedAll = false;
             }
 
-            if(goalVote > 100 ||goalVote <0)
+            bool isValid = IsValidInput(name ,goalVote, goalPresent, avgNumTasks, assignements);
+
+            return parsedAll && isValid;
+        }
+
+        /// <summary>
+        /// Checks if the name is not empty and the numbers are greater or equal 0 except goalVote which must be between 0 and 100
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="goalVote"></param>
+        /// <param name="goalPresent"></param>
+        /// <param name="avgTasks"></param>
+        /// <param name="assigns"></param>
+        /// <returns></returns>
+        private bool IsValidInput(string name, int goalVote, int goalPresent, int avgTasks, int assigns)
+        {
+            bool isValid = true;
+
+            if(name.Equals(""))
+            {
+                NameInputError.Content = "Darf nicht leer sein";
+                isValid = false;
+            }
+
+            if (goalVote > 100 || goalVote < 0)
             {
                 GoalVoteInputError.Content = "Nur Zahlen zwischen 0 und 100 erlaubt";
-                parsedAll = false;
+                isValid = false;
             }
 
-            return parsedAll;
+            if(goalPresent < 0)
+            {
+                MinimumPresentationInputError.Content = "Nur positive Zahlen erlaubt";
+                isValid = false;
+            }
+
+            if(avgTasks < 0)
+            {
+                TaskAmountInputError.Content = "Nur positive Zahlen erlaubt";
+                isValid = false;
+            }
+
+            if(assigns < 0)
+            {
+                ExerciseAmountInputError.Content = "Nur positive Zahlen erlaubt";
+                isValid = false;
+            }
+
+            return isValid;
         }
 
         //If parsing is successful, create and add a new Subject to the main menu
@@ -84,7 +130,7 @@ namespace InteraktiveSysVote
         {
             string subName = subjectName.Text;
 
-            if (TryParsingFields(out int goalVote, out int goalPresent, out int averageTasks, out int assignements))
+            if (TryParsingFields(subName ,out int goalVote, out int goalPresent, out int averageTasks, out int assignements))
             {
                 SubjectPanel newSubject = new SubjectPanel(subName, goalVote, goalPresent,averageTasks, assignements);
                 MainWindow.homeView.SubjectStack.Children.Add(newSubject);
