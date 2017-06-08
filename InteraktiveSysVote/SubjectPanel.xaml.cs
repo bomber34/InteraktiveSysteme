@@ -34,12 +34,16 @@ namespace InteraktiveSysVote
             goalVoted.Content = avgVoteGoal.ToString()+"%";
             GoalPresent.Content = minPresent.ToString();
 
+
             exerciseMenu = new ExerciseWindow(this, subjectName, avgVoteGoal ,minPresent, numOfTasks , numOfExercises);
             
         }
         private void EditSubjectBtn_Click(object sender, RoutedEventArgs e)
         {
-            // TODO implement  
+            int intGoalVoted = Int32.Parse(goalVoted.Content.ToString().Remove(goalVoted.Content.ToString().Length-1));
+            int intGoalPresent = Int32.Parse(GoalPresent.Content.ToString());
+           MainWindow.mainWindowGrid.Children.RemoveAt(0);
+            MainWindow.mainWindowGrid.Children.Add(new CreateSubjectWindow(SubjectName.Text,intGoalVoted,intGoalPresent,exerciseMenu.numberOfTasks,exerciseMenu.numberOfAssignements));
         }
 
         private void DeleteSubjectBtn_Click(object sender, RoutedEventArgs e)

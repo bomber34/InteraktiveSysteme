@@ -21,7 +21,7 @@ namespace InteraktiveSysVote
     public partial class ExerciseWindow : UserControl
     {
         private string subjectName;
-        private int goalPresent, goalVote,numberOfTasks, numberOfAssignements, currentNumOfAssignments, originalNumAssigns;
+        public int goalPresent, goalVote,numberOfTasks, numberOfAssignements, currentNumOfAssignments, originalNumAssigns;
         private SubjectPanel parentField;
         private ScrollViewer ExerciseWindowScrollViewer;
         private StackPanel ExerciseStackPanel;

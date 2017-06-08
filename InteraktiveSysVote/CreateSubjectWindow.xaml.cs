@@ -25,6 +25,17 @@ namespace InteraktiveSysVote
             InitializeComponent();
         }
 
+        public CreateSubjectWindow(string currentSubjectName,int currentGoalVoteAvg,int currentGoalPresantation,int currentAvgOfTasks,int currentNumOfExercises)
+        {
+            InitializeComponent();
+            subjectName.Text = currentSubjectName;
+            goalVoteAvg.Text = currentGoalVoteAvg.ToString();
+            goalPresentation.Text = currentGoalPresantation.ToString();
+            avgOfTasks.Text = currentAvgOfTasks.ToString();
+            numOfExercises.Text = currentNumOfExercises.ToString();
+            accept.Content = "Übernehmen";
+        }
+
         /// <summary>
         /// Try parsing all TextBoxes to numbers. If it fails it will inform user which field failed
         /// </summary>
