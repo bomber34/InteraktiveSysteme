@@ -49,7 +49,11 @@ namespace InteraktiveSysVote
 
         private void DeleteSubjectBtn_Click(object sender, RoutedEventArgs e)
         {
-            // TODO implement            
+            MessageBoxResult result = MessageBox.Show("Möchtest du das Fach löschen?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                MainWindow.homeView.SubjectStack.Children.RemoveAt(MainWindow.homeView.SubjectStack.Children.IndexOf(this));
+            }
         }
 
         ///private void UserControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
