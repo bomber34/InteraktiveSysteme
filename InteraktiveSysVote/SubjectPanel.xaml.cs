@@ -35,7 +35,6 @@ namespace InteraktiveSysVote
             goalVoted.Content = avgVoteGoal.ToString()+"%";
             GoalPresent.Content = minPresent.ToString();
 
-
             exerciseMenu = new ExerciseWindow(this, subjectName, avgVoteGoal ,minPresent, numOfTasks , numOfExercises);
             
         }
@@ -55,8 +54,7 @@ namespace InteraktiveSysVote
                 MainWindow.homeView.SubjectStack.Children.RemoveAt(MainWindow.homeView.SubjectStack.Children.IndexOf(this));
             }
         }
-
-        ///private void UserControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        
         private void OpenExerciseWindowBtn_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.mainWindowGrid.Children.RemoveAt(0);
