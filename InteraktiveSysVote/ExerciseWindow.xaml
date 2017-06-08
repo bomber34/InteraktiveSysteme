@@ -9,9 +9,9 @@ d:DesignHeight="525" d:DesignWidth="525">
     <DockPanel x:Name="MainExerciseWindowDockPanel" Background="White">
         <!--Options-->
         <DockPanel DockPanel.Dock="Top" HorizontalAlignment="Stretch" Height="50" LastChildFill="False" VerticalAlignment="Top" Width="Auto">
-            <Button x:Name="HomeBtn" Content="Home" FontSize="25" VerticalAlignment="Stretch"  Width="80" Click="HomeBtn_Click"/>
-            <Button x:Name="AddExerciseBtn" Content="+" FontSize="25" VerticalAlignment="Stretch" Width="80" Click="AddExerciseBtn_Click"/>
-            <Button x:Name="DeleteExerciseBtn" Content="Löschen" FontSize="20" VerticalAlignment="Stretch" Width="75" Click="DeleteExerciseBtn_Click"/>
+            <Button x:Name="HomeBtn" Content="Fachübersicht" FontSize="25" VerticalAlignment="Stretch"  Width="160" Click="HomeBtn_Click"/>
+            <Button x:Name="AddExerciseBtn" Content="Neue Übung" FontSize="25" VerticalAlignment="Stretch" Width="150" Click="AddExerciseBtn_Click"/>
+            <Button x:Name="DeleteExerciseBtn" Content="Letzte Übung löschen" FontSize="25" VerticalAlignment="Stretch" Width="250" Click="DeleteExerciseBtn_Click"/>
         </DockPanel>
         <!--Design Filler -->
         <Label x:Name="SubjectName" DockPanel.Dock="Top" Content="Fachname" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" 
