@@ -26,6 +26,14 @@ namespace InteraktiveSysVote
         public CreateSubjectWindow()
         {
             InitializeComponent();
+
+
+            Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Input, new Action(delegate ()
+            {
+                subjectName.Focus();
+                Keyboard.Focus(subjectName);
+                subjectName.Select(0, 0);
+            }));
             parentField = null;
         }
 
@@ -160,6 +168,11 @@ namespace InteraktiveSysVote
         private void Abbrechen_Click(object sender, RoutedEventArgs e)
         {
             HomeWindow.ReturnToMainMenu();
+        }
+
+        private void subjectName_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+
         }
     }
 }
