@@ -169,10 +169,5 @@ namespace InteraktiveSysVote
         {
             HomeWindow.ReturnToMainMenu();
         }
-
-        private void subjectName_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
-        {
-
-        }
     }
 }
