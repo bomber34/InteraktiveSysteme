@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,14 +21,18 @@ namespace InteraktiveSysVote
     /// </summary>
     public partial class CreateSubjectWindow : UserControl
     {
+        private SubjectPanel parentField;
+
         public CreateSubjectWindow()
         {
             InitializeComponent();
+            parentField = null;
         }
 
-        public CreateSubjectWindow(string currentSubjectName,int currentGoalVoteAvg,int currentGoalPresantation,int currentAvgOfTasks,int currentNumOfExercises)
+        public CreateSubjectWindow(SubjectPanel subjectPan,string currentSubjectName,int currentGoalVoteAvg,int currentGoalPresantation,int currentAvgOfTasks,int currentNumOfExercises)
         {
             InitializeComponent();
+            parentField = subjectPan;
             subjectName.Text = currentSubjectName;
             goalVoteAvg.Text = currentGoalVoteAvg.ToString();
             goalPresentation.Text = currentGoalPresantation.ToString();
@@ -132,9 +137,19 @@ namespace InteraktiveSysVote
 
             if (TryParsingFields(subName ,out int goalVote, out int goalPresent, out int averageTasks, out int assignements))
             {
+                if (parentField == null) { 
                 SubjectPanel newSubject = new SubjectPanel(subName, goalVote, goalPresent,averageTasks, assignements);
                 MainWindow.homeView.SubjectStack.Children.Add(newSubject);
+                }
 
+                else
+                {
+                    parentField.SubjectName.Text = subName;
+                    parentField.goalVoted.Content = goalVote.ToString() + "%";
+                    parentField.GoalPresent.Content = goalPresent.ToString();
+                  
+                    parentField.exerciseMenu.ApplyChanges(subName, goalVote, goalPresent, averageTasks, assignements);
+                }
                 //return to main menu
                 HomeWindow.ReturnToMainMenu();
             }

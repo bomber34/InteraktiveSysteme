@@ -120,6 +120,7 @@ namespace InteraktiveSysVote
         {
             parentField.avgVoted.Content = AverageVoted().ToString()+"%";
 
+            //TODO change colour also after editing
             if (Int32.Parse(parentField.avgVoted.Content.ToString().Remove(parentField.avgVoted.Content.ToString().Length-1)) >= (Int32.Parse(parentField.goalVoted.Content.ToString().Remove(parentField.goalVoted.Content.ToString().Length - 1))))
                 parentField.avgVoted.Foreground = new SolidColorBrush(Colors.Black);
 
@@ -148,7 +149,7 @@ namespace InteraktiveSysVote
             int totalLeftTasks = numberOfTasks * assignmentsLeft;
             GetTasksDoneAndTotal(out int totalDone, out int currentTotalTasks);
             int allTasks = totalLeftTasks + currentTotalTasks;
-            int leftToDo = (int)Math.Ceiling((((double)(allTasks) / 100.0)*(double)goalVote)) - totalDone;
+            int leftToDo = (int)Math.Ceiling((((double)(allTasks) / 100.0)*(double) goalVote)) - totalDone;
 
             if (assignmentsLeft != 0)
             {
@@ -158,6 +159,25 @@ namespace InteraktiveSysVote
             }
             else
                 generalOverview.AvgToDoInfoLabel.Content = "Alle Übungen sind vorbei";
+        }
+
+        public void ApplyChanges(string subName, int goalVote, int goalPresent, int averageTasks, int assignements)
+        {
+            //Set Label Content
+            subjectName = subName;
+            SubjectName.Content = subjectName;
+
+            //Reset class Attributes
+            this.goalVote = goalVote;
+            this.goalPresent = goalPresent;
+            numberOfTasks = averageTasks;
+            numberOfAssignements = assignements;
+            originalNumAssigns = numberOfAssignements;
+
+            generalOverview.GoalPresent.Content = goalPresent.ToString();
+            generalOverview.ApplyChanges(goalVote, assignements, averageTasks);
+
+            CalculatedAverageLeftToDo();
         }
     }
 }

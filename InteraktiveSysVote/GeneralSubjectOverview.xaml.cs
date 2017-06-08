@@ -49,6 +49,15 @@ namespace InteraktiveSysVote
                 AvgToDoInfoLabel.Content = "Im Schnitt fehlen noch " + avgTasksToDo + " Aufgaben pro Übung";
         }
 
+        public void ApplyChanges(int goalVote,int assigns, int avgTasks)
+        {
+            avgVoteGoal = goalVote;
+            expectedAssignments = assigns;
+            avgExpectedTasks = avgTasks;
+
+
+        }
+
         /// <summary>
         /// Takes a double and rounds it to the 2nd decimal point
         /// </summary>
