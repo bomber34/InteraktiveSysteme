@@ -20,45 +20,90 @@ namespace InteraktiveSysVote
     /// </summary>
     public partial class SubjectPanel : UserControl
     {
-        //TODO fix this silly visibility stuff 
-        public ExerciseWindow exerciseMenu;
+        
+        private ExerciseWindow exerciseMenuWindow;
 
         public SubjectPanel()
         {
             InitializeComponent();
         }
 
-        public SubjectPanel(string subjectName, int avgVoteGoal, int minPresent, int numOfTasks, int numOfExercises)
+        public SubjectPanel(string subjectName, int avgVoteGoal,
+            int minPresent, int numOfTasks, int numOfExercises)
         {
             InitializeComponent();
-            SubjectName.Text = subjectName;
-            goalVoted.Content = avgVoteGoal.ToString()+"%";
-            GoalPresent.Content = minPresent.ToString();
+            SubjectNameTextBlock.Text = subjectName;
+            SetGoalVotedLabel(avgVoteGoal);
+            GoalPresentLabel.Content = minPresent.ToString();
 
-            exerciseMenu = new ExerciseWindow(this, subjectName, avgVoteGoal ,minPresent, numOfTasks , numOfExercises);
-            
+            exerciseMenuWindow = new ExerciseWindow(this, numOfTasks , numOfExercises);
         }
-        private void EditSubjectBtn_Click(object sender, RoutedEventArgs e)
+
+        public int GetAverageNumTasks()
         {
-            int intGoalVoted = Int32.Parse(goalVoted.Content.ToString().Remove(goalVoted.Content.ToString().Length-1));
-            int intGoalPresent = Int32.Parse(GoalPresent.Content.ToString());
-            MainWindow.mainWindowGrid.Children.RemoveAt(0);
-            MainWindow.mainWindowGrid.Children.Add(new CreateSubjectWindow(this, SubjectName.Text, intGoalVoted, intGoalPresent,exerciseMenu.numberOfTasks,exerciseMenu.numberOfAssignements));
+            return exerciseMenuWindow.avgNumOfTasks;
+        }
+
+        public int GetNumOfAssignements()
+        {
+            return exerciseMenuWindow.numberOfAssignements;
+        }
+
+        /// <summary>
+        /// Gets the Number of GoalVoted without the %
+        /// </summary>
+        /// <returns></returns>
+        public int GetGoalVoted()
+        {
+            //There will always be a % at the end of the Label which has to be removed
+            System.Diagnostics.Debug.Assert(Int32.TryParse(GoalVotedLabel.Content.ToString().Remove(GoalVotedLabel.Content.ToString().Length - 1), out int result));
+
+            return Int32.Parse(GoalVotedLabel.Content.ToString().Remove(GoalVotedLabel.Content.ToString().Length - 1));
+        }
+
+        /// <summary>
+        /// Places a % at the end of the number
+        /// </summary>
+        /// <param name="goalVote"></param>
+        public void SetGoalVotedLabel(int goalVote)
+        {
+            GoalVotedLabel.Content = goalVote.ToString() + "%";
+        }
+
+        /// <summary>
+        /// direct these values to the exerciseMenuWindow.ApplyChanges
+        /// </summary>
+        /// <param name="averageTasks"></param>
+        /// <param name="assignments"></param>
+        public void ApplyChanges(int averageTasks, int assignments)
+        {
+            exerciseMenuWindow.ApplyChanges(averageTasks, assignments);
+        }
+
+        private void EditSubjectBtn_Click(object sender, RoutedEventArgs e)
+        { 
+            //Switch the CreateSubject View
+            MainWindow.mainViewGrid.Children.RemoveAt(0);
+            MainWindow.mainViewGrid.Children.Add(new CreateSubjectWindow(this));
         }
 
         private void DeleteSubjectBtn_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Möchtest du das Fach löschen?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            //Create dialog with user to be sure they want to delete the subject
+            MessageBoxResult result = MessageBox.Show("Möchtest du das Fach löschen?",
+                "", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
-                MainWindow.homeView.SubjectStack.Children.RemoveAt(MainWindow.homeView.SubjectStack.Children.IndexOf(this));
+                MainWindow.homeView.SubjectStackPanel.Children
+                    .RemoveAt(MainWindow.homeView.SubjectStackPanel.Children.IndexOf(this));
             }
         }
         
         private void OpenExerciseWindowBtn_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.mainWindowGrid.Children.RemoveAt(0);
-            MainWindow.mainWindowGrid.Children.Add(exerciseMenu);
+            //Switch to exercise view
+            MainWindow.mainViewGrid.Children.RemoveAt(0);
+            MainWindow.mainViewGrid.Children.Add(exerciseMenuWindow);
         }
     }
 }

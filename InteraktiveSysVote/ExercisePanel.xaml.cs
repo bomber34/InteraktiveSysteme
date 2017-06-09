@@ -37,7 +37,7 @@ namespace InteraktiveSysVote
             TotalTasksLabel.Content = allTasks.ToString();
             TotalTasks = allTasks;
 
-            ExerciseLabel.Content = ExerciseLabel.Content + currentAssignment.ToString();
+            ExerciseIDLabel.Content += currentAssignment.ToString();
 
             parentField = parent;
         }
@@ -50,11 +50,12 @@ namespace InteraktiveSysVote
         private void ButtonUp_Click(object sender, RoutedEventArgs e)
         {
             //Label is initialized with legit numbers, therefore parsing will be successful
-            int num = (sender.Equals(incDone) ? Int32.Parse(VotedTasksLabel.Content.ToString()) : Int32.Parse(TotalTasksLabel.Content.ToString()));
+            int num = (sender.Equals(IncDoneButton) ? Int32.Parse(VotedTasksLabel.Content.ToString()) :
+                                                Int32.Parse(TotalTasksLabel.Content.ToString()));
 
             num++;
 
-            if (sender.Equals(incDone)) { 
+            if (sender.Equals(IncDoneButton)) { 
                 VotedTasksLabel.Content = num.ToString();
                 DoneTasks++;
             }
@@ -82,13 +83,13 @@ namespace InteraktiveSysVote
         private void ButtonDown_Click(object sender, RoutedEventArgs e)
         {
             //Label is initialized with legit numbers, therefore parsing will be successful
-            int num = (sender.Equals(decDone) ? Int32.Parse(VotedTasksLabel.Content.ToString()) : Int32.Parse(TotalTasksLabel.Content.ToString()));
+            int num = (sender.Equals(DecDoneButton) ? Int32.Parse(VotedTasksLabel.Content.ToString()) : Int32.Parse(TotalTasksLabel.Content.ToString()));
 
             num--;
             if (num < 0) //no negative numbers allowed
                 return;
 
-            if (sender.Equals(decDone))
+            if (sender.Equals(DecDoneButton))
             {
                 VotedTasksLabel.Content = num.ToString();
                 DoneTasks--;

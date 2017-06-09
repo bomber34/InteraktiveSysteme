@@ -37,21 +37,21 @@
             <Label Content="Anzahl Aufgaben&#x0a;    pro Übung:" Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="0" FontSize="16" VerticalContentAlignment="Center"/>
             <Label Content="Anzahl Übungen:" Grid.Row="5" Grid.Column="0" FontSize="16" VerticalContentAlignment="Center"/>
             <!-- Error Labels -->
-            <Label x:Name="NameInputError" Content="" Grid.Row="1" Grid.Column="4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="Red" FontSize="16" />
-            <Label x:Name="GoalVoteInputError" Content="" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="16" Foreground="Red" />
-            <Label x:Name="MinimumPresentationInputError" Content="" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="16" Foreground="Red" />
-            <Label x:Name="TaskAmountInputError" Content="" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="16" Foreground="Red" />
-            <Label x:Name="ExerciseAmountInputError" Content="" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="16" Foreground="Red" />
+            <Label x:Name="NameInputErrorLabel" Content="" Grid.Row="1" Grid.Column="4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="Red" FontSize="16" />
+            <Label x:Name="GoalVoteInputErrorLabel" Content="" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="16" Foreground="Red" />
+            <Label x:Name="MinimumPresentationInputErrorLabel" Content="" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="16" Foreground="Red" />
+            <Label x:Name="TaskAmountInputErrorLabel" Content="" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="16" Foreground="Red" />
+            <Label x:Name="AssignmentAmountInputErrorLabel" Content="" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="16" Foreground="Red" />
 
             <!-- Buttons -->
-            <Button x:Name="accept" Background="Green" Foreground="White" Margin="10,10,10,10" Grid.Row="6" Grid.Column="1" Content="Erstellen" FontSize="16" Click="Accept_Click" />
-            <Button x:Name="Abbrechen" Background="Red" Foreground="Black" Margin="10,10,10,10" Grid.Row="6" Grid.Column="2" Content="Abbrechen" FontSize="16" Click="Abbrechen_Click"/>
+            <Button x:Name="AcceptButton" Background="Green" Foreground="White" Margin="10,10,10,10" Grid.Row="6" Grid.Column="1" Content="Erstellen" FontSize="16" Click="Accept_Click" />
+            <Button x:Name="AbortButton" Background="Red" Foreground="Black" Margin="10,10,10,10" Grid.Row="6" Grid.Column="2" Content="Abbrechen" FontSize="16" Click="Abort_Click"/>
             <!-- Input -->
-            <TextBox x:Name="subjectName" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="30,0,30,0"  AcceptsReturn="False" VerticalContentAlignment="Center" FontSize="16"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="40" Background="Transparent" />
-            <TextBox x:Name="goalVoteAvg" Grid.Column="1" Grid.Row="2" Margin="30,0,5,0" AcceptsReturn="False" Text="66" HorizontalContentAlignment="Center"   VerticalContentAlignment="Center" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="40"/>
-            <TextBox x:Name="goalPresentation" Grid.Column="1" Grid.Row="3" Margin="30,0,5,0" AcceptsReturn="False" Text="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Stretch"  Height="40"/>
-            <TextBox x:Name="avgOfTasks" Grid.Column="1" Grid.Row="4" Margin="30,0,5,0" AcceptsReturn="False" Text="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="40" />
-            <TextBox x:Name="numOfExercises" Grid.Column="1" Grid.Row="5" Margin="30,0,5,0" AcceptsReturn="False" Text="13" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Stretch"  Height="40"/>
+            <TextBox x:Name="SubjectNameTextBox" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="30,0,30,0"  AcceptsReturn="False" VerticalContentAlignment="Center" FontSize="16"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="40" Background="Transparent" />
+            <TextBox x:Name="GoalVoteAvgTextBox" Grid.Column="1" Grid.Row="2" Margin="30,0,5,0" AcceptsReturn="False" Text="66" HorizontalContentAlignment="Center"   VerticalContentAlignment="Center" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="40"/>
+            <TextBox x:Name="GoalPresentationTextBox" Grid.Column="1" Grid.Row="3" Margin="30,0,5,0" AcceptsReturn="False" Text="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Stretch"  Height="40"/>
+            <TextBox x:Name="AvgOfTasksTextBox" Grid.Column="1" Grid.Row="4" Margin="30,0,5,0" AcceptsReturn="False" Text="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="40" />
+            <TextBox x:Name="NumOfAssignementsTextBox" Grid.Column="1" Grid.Row="5" Margin="30,0,5,0" AcceptsReturn="False" Text="13" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Stretch"  Height="40"/>
         </Grid>
     </Grid>
 </UserControl>

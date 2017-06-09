@@ -28,16 +28,16 @@
             </Grid.ColumnDefinitions>
             <!--Content-->
             <!-- 1st Row -->
-            <Label x:Name="AverageVotedTasks" Content="Durchschnitt votierter Aufgaben: " Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20"/>
+            <Label x:Name="AverageVotedTasksLabel" Content="Durchschnitt votierter Aufgaben: " Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20"/>
             <!-- 2nd Row-->
             <Label x:Name="AvgToDoInfoLabel" Content="Im Schnitt fehlen noch" Grid.Row="3" Grid.RowSpan="3" Grid.ColumnSpan="4" HorizontalContentAlignment="Center" FontSize="20"/>
             <!-- 3rd Row -->
-            <Label x:Name="NumPresentations" Content="0" Grid.Row="7" Grid.Column="1" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-            <Button x:Name="PresentUp" Content="+" FontSize="16" Grid.Row="6" Grid.Column="1" Click="PresentUp_Click" />
-            <Button x:Name="PresentDown" Content="-" FontSize="16" Grid.Row="8" Grid.Column="1" Click="PresentDown_Click" />
+            <Label x:Name="NumPresentationsLabel" Content="0" Grid.Row="7" Grid.Column="1" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+            <Button x:Name="PresentUpButton" Content="+" FontSize="16" Grid.Row="6" Grid.Column="1" Click="PresentUp_Click" />
+            <Button x:Name="PresentDownButton" Content="-" FontSize="16" Grid.Row="8" Grid.Column="1" Click="PresentDown_Click" />
             <Label Content="Präsentiert:" Grid.Row="7" Grid.Column="0" FontSize="20" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
             <Label Content="von" Grid.Row="7" Grid.Column="2" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-            <Label x:Name="GoalPresent" Content="0" Grid.Row="7" Grid.Column="3" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+            <Label x:Name="GoalPresentLabel" Content="0" Grid.Row="7" Grid.Column="3" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
         </Grid>
     </Border>
 </UserControl>

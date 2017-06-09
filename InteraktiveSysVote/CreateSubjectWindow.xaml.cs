@@ -27,26 +27,31 @@ namespace InteraktiveSysVote
         {
             InitializeComponent();
 
-
+            //Give the SubjectNameTextBox Cursor and Keyboard Focus 
+            //so that the user can type without selecting it at start
             Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Input, new Action(delegate ()
             {
-                subjectName.Focus();
-                Keyboard.Focus(subjectName);
-                subjectName.Select(0, 0);
+                SubjectNameTextBox.Focus();
+                Keyboard.Focus(SubjectNameTextBox);
+                SubjectNameTextBox.Select(0, 0);
             }));
             parentField = null;
         }
 
-        public CreateSubjectWindow(SubjectPanel subjectPan,string currentSubjectName,int currentGoalVoteAvg,int currentGoalPresantation,int currentAvgOfTasks,int currentNumOfExercises)
+        public CreateSubjectWindow(SubjectPanel subjectPan)
         {
             InitializeComponent();
+            //Attribute
             parentField = subjectPan;
-            subjectName.Text = currentSubjectName;
-            goalVoteAvg.Text = currentGoalVoteAvg.ToString();
-            goalPresentation.Text = currentGoalPresantation.ToString();
-            avgOfTasks.Text = currentAvgOfTasks.ToString();
-            numOfExercises.Text = currentNumOfExercises.ToString();
-            accept.Content = "Übernehmen";
+            //Show current information in the textboxes
+            SubjectNameTextBox.Text = subjectPan.SubjectNameTextBlock.Text;
+            GoalVoteAvgTextBox.Text = subjectPan.GetGoalVoted().ToString();
+            GoalPresentationTextBox.Text = subjectPan.GoalPresentLabel.Content.ToString();
+            AvgOfTasksTextBox.Text = subjectPan.GetAverageNumTasks().ToString();
+            NumOfAssignementsTextBox.Text = subjectPan.GetNumOfAssignements().ToString();
+            
+            //We don't create a new course, therefore a different text is used
+            AcceptButton.Content = "Übernehmen";
         }
 
         /// <summary>
@@ -56,37 +61,40 @@ namespace InteraktiveSysVote
         /// <param name="goalPresent"></param>
         /// <param name="assignements"></param>
         /// <returns></returns>
-        private bool TryParsingFields(string name, out int goalVote, out int goalPresent,out int avgNumTasks ,out int assignements)
+        private bool TryParsingFields(string name, out int goalVote,
+                                        out int goalPresent,out int avgNumTasks ,
+                                        out int assignements)
         {
-            bool parsedAll = true; //If one field fails, this will be set to false
-            if(!Int32.TryParse(goalVoteAvg.Text,out goalVote))
+            bool parsedAll = true; //If any field fails, this will be set to false
+            if(!Int32.TryParse(GoalVoteAvgTextBox.Text,out goalVote))
             {
-                GoalVoteInputError.Content = "Nur natürliche Zahlen erlaubt";
-                goalVote = 0;
+                GoalVoteInputErrorLabel.Content = "Nur natürliche Zahlen erlaubt";
+                goalVote = 0; //Set 0 for not failing again at the entry validation method
                 parsedAll = false;
             }
 
-            if (!Int32.TryParse(avgOfTasks.Text, out avgNumTasks))
+            if (!Int32.TryParse(AvgOfTasksTextBox.Text, out avgNumTasks))
             {
-                TaskAmountInputError.Content = "Nur natürliche Zahlen erlaubt";
+                TaskAmountInputErrorLabel.Content = "Nur natürliche Zahlen erlaubt";
                 avgNumTasks = 0;
                 parsedAll = false;
             }
 
-            if (!Int32.TryParse(goalPresentation.Text, out goalPresent))
+            if (!Int32.TryParse(GoalPresentationTextBox.Text, out goalPresent))
             {
-                MinimumPresentationInputError.Content = "Nur natürliche Zahlen erlaubt";
+                MinimumPresentationInputErrorLabel.Content = "Nur natürliche Zahlen erlaubt";
                 goalPresent = 0;
                 parsedAll = false;
             }
 
-            if(!Int32.TryParse(numOfExercises.Text, out assignements))
+            if(!Int32.TryParse(NumOfAssignementsTextBox.Text, out assignements))
             {
-                ExerciseAmountInputError.Content = "Nur natürliche Zahlen erlaubt";
+                AssignmentAmountInputErrorLabel.Content = "Nur natürliche Zahlen erlaubt";
                 assignements = 0;
                 parsedAll = false;
             }
 
+            //Check if the entries if parsable, are valid
             bool isValid = IsValidInput(name ,goalVote, goalPresent, avgNumTasks, assignements);
 
             return parsedAll && isValid;
@@ -103,35 +111,35 @@ namespace InteraktiveSysVote
         /// <returns></returns>
         private bool IsValidInput(string name, int goalVote, int goalPresent, int avgTasks, int assigns)
         {
-            bool isValid = true;
+            bool isValid = true; //If any field fails, this will be set to false
 
-            if(name.Equals(""))
+            if (name.Equals(""))
             {
-                NameInputError.Content = "Darf nicht leer sein";
+                NameInputErrorLabel.Content = "Darf nicht leer sein";
                 isValid = false;
             }
 
             if (goalVote > 100 || goalVote < 0)
             {
-                GoalVoteInputError.Content = "Nur Zahlen zwischen 0 und 100 erlaubt";
+                GoalVoteInputErrorLabel.Content = "Nur Zahlen zwischen 0 und 100 erlaubt";
                 isValid = false;
             }
 
             if(goalPresent < 0)
             {
-                MinimumPresentationInputError.Content = "Nur positive Zahlen erlaubt";
+                MinimumPresentationInputErrorLabel.Content = "Nur positive Zahlen erlaubt";
                 isValid = false;
             }
 
             if(avgTasks < 0)
             {
-                TaskAmountInputError.Content = "Nur positive Zahlen erlaubt";
+                TaskAmountInputErrorLabel.Content = "Nur positive Zahlen erlaubt";
                 isValid = false;
             }
 
             if(assigns < 0)
             {
-                ExerciseAmountInputError.Content = "Nur positive Zahlen erlaubt";
+                AssignmentAmountInputErrorLabel.Content = "Nur positive Zahlen erlaubt";
                 isValid = false;
             }
 
@@ -141,22 +149,24 @@ namespace InteraktiveSysVote
         //If parsing is successful, create and add a new Subject to the main menu
         private void Accept_Click(object sender, RoutedEventArgs e)
         {
-            string subName = subjectName.Text;
+            string subName = SubjectNameTextBox.Text;
 
             if (TryParsingFields(subName ,out int goalVote, out int goalPresent, out int averageTasks, out int assignements))
             {
+
                 if (parentField == null) { 
                 SubjectPanel newSubject = new SubjectPanel(subName, goalVote, goalPresent,averageTasks, assignements);
-                MainWindow.homeView.SubjectStack.Children.Add(newSubject);
+                MainWindow.homeView.SubjectStackPanel.Children.Add(newSubject);
                 }
-
+                
+                //Edit case
                 else
                 {
-                    parentField.SubjectName.Text = subName;
-                    parentField.goalVoted.Content = goalVote.ToString() + "%";
-                    parentField.GoalPresent.Content = goalPresent.ToString();
+                    parentField.SubjectNameTextBlock.Text = subName;
+                    parentField.SetGoalVotedLabel(goalVote);
+                    parentField.GoalPresentLabel.Content = goalPresent.ToString();
                   
-                    parentField.exerciseMenu.ApplyChanges(subName, goalVote, goalPresent, averageTasks, assignements);
+                    parentField.ApplyChanges(averageTasks, assignements);
                 }
                 //return to main menu
                 HomeWindow.ReturnToMainMenu();
@@ -165,7 +175,7 @@ namespace InteraktiveSysVote
         }
 
         // Just return home without changes
-        private void Abbrechen_Click(object sender, RoutedEventArgs e)
+        private void Abort_Click(object sender, RoutedEventArgs e)
         {
             HomeWindow.ReturnToMainMenu();
         }

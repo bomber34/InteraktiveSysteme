@@ -20,8 +20,8 @@ namespace InteraktiveSysVote
     /// </summary>
     public partial class ExerciseWindow : UserControl
     {
-        private string subjectName;
-        public int goalPresent, goalVote,numberOfTasks, numberOfAssignements, currentNumOfAssignments, originalNumAssigns;
+        
+        public int avgNumOfTasks, numberOfAssignements, currentNumOfAssignments, originalNumAssigns;
         private SubjectPanel parentField;
         private ScrollViewer ExerciseWindowScrollViewer;
         private StackPanel ExerciseStackPanel;
@@ -32,30 +32,33 @@ namespace InteraktiveSysVote
             InitializeComponent();
         }
 
-        public ExerciseWindow(SubjectPanel parent, string name,int minVote ,int minPresent, int numTasks, int numExercises)
+        public ExerciseWindow(SubjectPanel parent, int numTasks, int numAssigns)
         {
             InitializeComponent();
 
             //set class attributes
-            subjectName = name;
-            goalPresent = minPresent;
-            numberOfTasks = numTasks;
-            numberOfAssignements = numExercises;
+            avgNumOfTasks = numTasks;
+
+            numberOfAssignements = numAssigns;
             originalNumAssigns = numberOfAssignements;
             currentNumOfAssignments = 0;
-            goalVote = minVote;
+
+            //Remove the %
+            int goalVote = Int32.Parse(parent.GoalVotedLabel.Content.ToString()
+                .Remove(parent.GoalVotedLabel.Content.ToString().Length - 1));
+
             parentField = parent;
 
             //Set Label Content
-            SubjectName.Content = subjectName;
+            SubjectNameLabel.Content = parent.SubjectNameTextBlock.Text;
 
             //GeneralOverview
-            generalOverview = new GeneralSubjectOverview(goalVote, numExercises, numTasks);
-            generalOverview.GoalPresent.Content = minPresent.ToString();
+            generalOverview = new GeneralSubjectOverview(goalVote, numAssigns, numTasks);
+            generalOverview.GoalPresentLabel.Content = parent.GoalPresentLabel.Content;
 
             //Add generalOverview to DockPanel
             DockPanel.SetDock(generalOverview, Dock.Top);
-            MainExerciseWindowDockPanel.Children.Add(generalOverview);
+            ExerciseWindowDockPanel.Children.Add(generalOverview);
 
             //Initialize dynamic Content
             ExerciseWindowScrollViewer = new ScrollViewer()
@@ -64,7 +67,7 @@ namespace InteraktiveSysVote
             };
             //Add ScrollViewer to DockPanel
             DockPanel.SetDock(ExerciseWindowScrollViewer, Dock.Top);
-            MainExerciseWindowDockPanel.Children.Add(ExerciseWindowScrollViewer);
+            ExerciseWindowDockPanel.Children.Add(ExerciseWindowScrollViewer);
 
             //Create StackPanel for the Assignments
             ExerciseStackPanel = new StackPanel();
@@ -103,7 +106,7 @@ namespace InteraktiveSysVote
 
         private void DeleteExerciseBtn_Click(object sender, RoutedEventArgs e)
         {
-            //The first element is the general overview
+            //Prevent OutOfIndex Exception
             if (ExerciseStackPanel.Children.Count > 0)
             {
                 ExerciseStackPanel.Children.RemoveAt(ExerciseStackPanel.Children.Count - 1);
@@ -121,26 +124,34 @@ namespace InteraktiveSysVote
         /// </summary>
         private void VotedPercentageColourChange()
         {
-            if (Int32.Parse(parentField.avgVoted.Content.ToString().Remove(parentField.avgVoted.Content.ToString().Length - 1)) >= (Int32.Parse(parentField.goalVoted.Content.ToString().Remove(parentField.goalVoted.Content.ToString().Length - 1))))
-                parentField.avgVoted.Foreground = new SolidColorBrush(Colors.Black);
+            // Parsing will work due to this information being checked at previous steps
+            int avgVoted = Int32.Parse(parentField.AvgVotedLabel.Content.ToString()
+                .Remove(parentField.AvgVotedLabel.Content.ToString().Length - 1));
+
+            int goalVote = (Int32.Parse(parentField.GoalVotedLabel.Content.ToString()
+                    .Remove(parentField.GoalVotedLabel.Content.ToString().Length - 1)));
+
+            if ( avgVoted >= goalVote)
+            { 
+                parentField.AvgVotedLabel.Foreground = new SolidColorBrush(Colors.Black);
+            }
             else
-                parentField.avgVoted.Foreground = new SolidColorBrush(Colors.Red);
+                parentField.AvgVotedLabel.Foreground = new SolidColorBrush(Colors.Red);
         }
 
         private void HomeBtn_Click(object sender, RoutedEventArgs e)
         {
-            parentField.avgVoted.Content = AverageVoted().ToString()+"%";
+            parentField.AvgVotedLabel.Content = AverageVoted().ToString()+"%";
             VotedPercentageColourChange();
-            //TODO change colour also after editing
 
-            parentField.presented.Content = generalOverview.NumPresentations.Content;
+            parentField.PresentedLabel.Content = generalOverview.NumPresentationsLabel.Content;
             HomeWindow.ReturnToMainMenu();
         }
 
         private void AddExerciseBtn_Click(object sender, RoutedEventArgs e)
         {
             currentNumOfAssignments++;
-            ExercisePanel exercise = new ExercisePanel(this, numberOfTasks, currentNumOfAssignments);
+            ExercisePanel exercise = new ExercisePanel(this, avgNumOfTasks, currentNumOfAssignments);
             ExerciseStackPanel.Children.Add(exercise);
             
             if (currentNumOfAssignments > numberOfAssignements)
@@ -154,9 +165,14 @@ namespace InteraktiveSysVote
         /// </summary>
         public void CalculatedAverageLeftToDo()
         {
+            int goalVote = Int32.Parse(parentField.GoalVotedLabel.Content.ToString()
+                .Remove(parentField.GoalVotedLabel.Content.ToString().Length - 1));
+
             int assignmentsLeft = (numberOfAssignements - currentNumOfAssignments);
-            int totalLeftTasks = numberOfTasks * assignmentsLeft;
+            int totalLeftTasks = avgNumOfTasks * assignmentsLeft;
+
             GetTasksDoneAndTotal(out int totalDone, out int currentTotalTasks);
+
             int allTasks = totalLeftTasks + currentTotalTasks;
             int leftToDo = (int)Math.Ceiling((((double)(allTasks) / 100.0)*(double) goalVote)) - totalDone;
 
@@ -170,24 +186,23 @@ namespace InteraktiveSysVote
                 generalOverview.AvgToDoInfoLabel.Content = "Alle Übungen sind vorbei";
         }
 
-        public void ApplyChanges(string subName, int goalVote, int goalPresent, int averageTasks, int assignements)
+        /// <summary>
+        /// Use these new values to recalculate the average tasks the user needs to do
+        /// </summary>
+        /// <param name="averageTasks"></param>
+        /// <param name="assignements"></param>
+        public void ApplyChanges(int averageTasks, int assignements)
         {
             //Set Label Content
-            subjectName = subName;
-            SubjectName.Content = subjectName;
+            SubjectNameLabel.Content = parentField.SubjectNameTextBlock.Text;    
 
-            //Reset class Attributes
-            this.goalVote = goalVote;
-            this.goalPresent = goalPresent;
-            numberOfTasks = averageTasks;
+            avgNumOfTasks = averageTasks;
             numberOfAssignements = assignements;
             originalNumAssigns = numberOfAssignements;
 
-            generalOverview.GoalPresent.Content = goalPresent.ToString();
-            generalOverview.ApplyChanges(goalVote, assignements, averageTasks);
+            generalOverview.GoalPresentLabel.Content = parentField.GoalPresentLabel.Content;
 
             VotedPercentageColourChange();
-
             CalculatedAverageLeftToDo();
         }
     }

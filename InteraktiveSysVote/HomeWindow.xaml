@@ -9,16 +9,16 @@
     <DockPanel Background="White" HorizontalAlignment="Stretch">
         <!--Options-->
         <DockPanel DockPanel.Dock="Top" HorizontalAlignment="Stretch" Height="50" LastChildFill="False" VerticalAlignment="Top" Width="Auto">
-            <Button x:Name="addSubjectBtn"  Content="Neues Fach" FontSize="25" Height="50" VerticalAlignment="Top" Width="200" Click="AddSubjectBtn_Click"/>
+            <Button x:Name="AddSubjectButton"  Content="Neues Fach" FontSize="25" Height="50" VerticalAlignment="Top" Width="200" Click="AddSubjectBtn_Click"/>
         </DockPanel>
         <!--Design Filler -->
-        <Label x:Name="label" DockPanel.Dock="Top" Content="Fächer" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" 
+        <Label DockPanel.Dock="Top" Content="Fächer" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" 
                VerticalAlignment="Top" Height="50"
                Background="Beige" FontSize="30"/> 
 
         <!--SubjectPanels-->
         <ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Auto">
-            <StackPanel x:Name="SubjectStack" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Top"/>
+            <StackPanel x:Name="SubjectStackPanel" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Top"/>
         </ScrollViewer>
     </DockPanel>
 </UserControl>

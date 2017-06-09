@@ -34,17 +34,16 @@
                 <Label Grid.Row="1" Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="benötigt:" FontSize="20"/>
                 <Label Grid.Row="2" Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="von" FontSize="20"/>
                 <!--Changable Content-->
-                <Label x:Name="avgVoted" Content="0%" FontSize="20" Foreground="Red" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="1" Grid.Column="1" />
-                <Label x:Name="presented" Content="0" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="2" Grid.Column="1"/>
-                <Label x:Name="goalVoted" Content="66%" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="1" Grid.Column="3"/>
-                <Label x:Name="GoalPresent" Content="2" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="2" Grid.Column="3"/>
+                <Label x:Name="AvgVotedLabel" Content="0%" FontSize="20" Foreground="Red" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="1" Grid.Column="1" />
+                <Label x:Name="PresentedLabel" Content="0" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="2" Grid.Column="1"/>
+                <Label x:Name="GoalVotedLabel" Content="66%" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="1" Grid.Column="3"/>
+                <Label x:Name="GoalPresentLabel" Content="2" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="2" Grid.Column="3"/>
                 <!-- Buttons -->
-                <Button x:Name="editSubjectBtn" FontSize="20" BorderBrush="LightGray" Background="WhiteSmoke" Content="Ändern" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="80" Click="EditSubjectBtn_Click"/>
-                <Button x:Name="deleteSubjectBtn" FontSize="20" BorderBrush="LightGray" Background="WhiteSmoke" Content="Löschen" Grid.Column="3" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="80" Click="DeleteSubjectBtn_Click"/>
-                <Button x:Name="OpenExerciseWindowBtn" Margin="10,0,0,0" FontSize="20" MinWidth="100" BorderBrush="LightGray" Background="WhiteSmoke" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="Auto" Click="OpenExerciseWindowBtn_Click" Height="Auto" HorizontalContentAlignment="Stretch" Grid.ColumnSpan="2">
-                    <TextBlock TextWrapping="Wrap" x:Name="SubjectName" TextAlignment="Left"/>
+                <Button x:Name="EditSubjectButton" FontSize="20" BorderBrush="LightGray" Background="WhiteSmoke" Content="Ändern" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="80" Click="EditSubjectBtn_Click"/>
+                <Button x:Name="DeleteSubjectButton" FontSize="20" BorderBrush="LightGray" Background="WhiteSmoke" Content="Löschen" Grid.Column="3" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="80" Click="DeleteSubjectBtn_Click"/>
+                <Button x:Name="OpenExerciseWindowButton" Margin="10,0,0,0" FontSize="20" MinWidth="100" BorderBrush="LightGray" Background="WhiteSmoke" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="Auto" Click="OpenExerciseWindowBtn_Click" Height="Auto" HorizontalContentAlignment="Stretch" Grid.ColumnSpan="2">
+                    <TextBlock TextWrapping="Wrap" x:Name="SubjectNameTextBlock" TextAlignment="Left"/>
                 </Button>
-
             </Grid>
         </Grid>
     </Border>

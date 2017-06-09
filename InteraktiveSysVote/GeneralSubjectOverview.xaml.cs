@@ -20,8 +20,6 @@ namespace InteraktiveSysVote
     /// </summary>
     public partial class GeneralSubjectOverview : UserControl
     {
-        private int expectedAssignments, avgExpectedTasks, avgVoteGoal;
-        double avgTasksToDo;
 
         public GeneralSubjectOverview()
         {
@@ -31,31 +29,15 @@ namespace InteraktiveSysVote
         public GeneralSubjectOverview(int averageVoteGoal,int numOfAssignements, int averageExpectedTasks)
         {
             InitializeComponent();
-           
-            expectedAssignments = numOfAssignements;
-            avgExpectedTasks = averageExpectedTasks;
-            avgVoteGoal = averageVoteGoal;
+          
 
             //Calculate average of tasks that the user needs to do per assignment
-            double allTasks = (double) (expectedAssignments * avgExpectedTasks);
-            avgTasksToDo = (allTasks / 100.0) * (double)averageVoteGoal;
-            avgTasksToDo = avgTasksToDo / (double) expectedAssignments;
+            double allTasks = (double) (numOfAssignements * averageExpectedTasks);
+            double avgTasksToDo = (allTasks / 100.0) * (double)averageVoteGoal;
+            avgTasksToDo = avgTasksToDo / (double) numOfAssignements;
             avgTasksToDo = RoundTo2DecimalPoints(avgTasksToDo);
 
-            if (avgTasksToDo == 1.00)
-                AvgToDoInfoLabel.Content = "Im Schnitt fehlt noch " + avgTasksToDo + " Aufgabe pro Übung";
-
-            else
-                AvgToDoInfoLabel.Content = "Im Schnitt fehlen noch " + avgTasksToDo + " Aufgaben pro Übung";
-        }
-
-        public void ApplyChanges(int goalVote,int assigns, int avgTasks)
-        {
-            avgVoteGoal = goalVote;
-            expectedAssignments = assigns;
-            avgExpectedTasks = avgTasks;
-
-
+            SetAverageTasksLeftToDoLabel(avgTasksToDo);
         }
 
         /// <summary>
@@ -84,18 +66,18 @@ namespace InteraktiveSysVote
         private void PresentUp_Click(object sender, RoutedEventArgs e)
         {
             //NumPresentation is a label which is initialized with a digit, therefore parsing is safe
-            int num = Int32.Parse(NumPresentations.Content.ToString());
+            int num = Int32.Parse(NumPresentationsLabel.Content.ToString());
             num++;
-            NumPresentations.Content = num.ToString();
+            NumPresentationsLabel.Content = num.ToString();
         }
 
         private void PresentDown_Click(object sender, RoutedEventArgs e)
         {
             //NumPresentation is a label which is initialized with a digit, therefore parsing is safe
-            int num = Int32.Parse(NumPresentations.Content.ToString());
+            int num = Int32.Parse(NumPresentationsLabel.Content.ToString());
             if (num > 0) // There can't be negative presentations
                 num--;
-            NumPresentations.Content = num.ToString();
+            NumPresentationsLabel.Content = num.ToString();
         }
     }
 }

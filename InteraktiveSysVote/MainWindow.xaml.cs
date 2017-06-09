@@ -21,19 +21,17 @@ namespace InteraktiveSysVote
     public partial class MainWindow : Window
     {
         public static HomeWindow homeView;
-        public static Grid mainWindowGrid;
+        public static Grid mainViewGrid;
 
         public MainWindow()
         {
 
             InitializeComponent();
-            mainWindowGrid = new Grid();
+            mainViewGrid = new Grid();
             homeView = new HomeWindow();
 
-            mainWindowGrid.Children.Add(homeView);
-            startGrid.Children.Add(mainWindowGrid);
+            mainViewGrid.Children.Add(homeView);
+            MainWindowGrid.Children.Add(mainViewGrid);
         }
-
-
     }
 }
