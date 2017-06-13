@@ -104,21 +104,6 @@ namespace InteraktiveSysVote
             return (int) average;
         }
 
-        private void DeleteExerciseBtn_Click(object sender, RoutedEventArgs e)
-        {
-            //Prevent OutOfIndex Exception
-            if (ExerciseStackPanel.Children.Count > 0)
-            {
-                ExerciseStackPanel.Children.RemoveAt(ExerciseStackPanel.Children.Count - 1);
-                currentNumOfAssignments--;
-
-                if (currentNumOfAssignments <= originalNumAssigns)
-                    numberOfAssignements = originalNumAssigns;
-
-                CalculatedAverageLeftToDo();
-            }
-        }
-
         /// <summary>
         /// If the done% is lower than goal% -> Colour Red else Black
         /// </summary>
@@ -139,6 +124,7 @@ namespace InteraktiveSysVote
                 parentField.AvgVotedLabel.Foreground = new SolidColorBrush(Colors.Red);
         }
 
+        //BUTTONS
         private void HomeBtn_Click(object sender, RoutedEventArgs e)
         {
             parentField.AvgVotedLabel.Content = AverageVoted().ToString()+"%";
@@ -152,12 +138,27 @@ namespace InteraktiveSysVote
         {
             currentNumOfAssignments++;
             ExercisePanel exercise = new ExercisePanel(this, avgNumOfTasks, currentNumOfAssignments);
-            ExerciseStackPanel.Children.Add(exercise);
+            ExerciseStackPanel.Children.Insert(0, exercise);
             
             if (currentNumOfAssignments > numberOfAssignements)
                 numberOfAssignements = currentNumOfAssignments;
 
             CalculatedAverageLeftToDo();
+        }
+
+        private void DeleteExerciseBtn_Click(object sender, RoutedEventArgs e)
+        {
+            //Prevent OutOfIndex Exception
+            if (ExerciseStackPanel.Children.Count > 0)
+            {
+                ExerciseStackPanel.Children.RemoveAt(0);
+                currentNumOfAssignments--;
+
+                if (currentNumOfAssignments <= originalNumAssigns)
+                    numberOfAssignements = originalNumAssigns;
+
+                CalculatedAverageLeftToDo();
+            }
         }
 
         /// <summary>

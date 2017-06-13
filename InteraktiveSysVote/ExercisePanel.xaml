@@ -7,7 +7,7 @@
              mc:Ignorable="d" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
     <Border BorderThickness="0,0,0,2" BorderBrush="Black">
     <Grid Background="White">
-        <Label x:Name="ExerciseIDLabel" Content="Übung "  Width="Auto" Height="Auto"/>
+        <Label x:Name="ExerciseIDLabel" Content="Übung " FontSize="20" Width="Auto" Height="Auto"/>
         <Grid Margin="0,25,0,25">
             <!-- Grid Design -->
             <Grid.RowDefinitions>
@@ -22,16 +22,16 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <!--Static Content-->
-            <Label Content="Votiert: " Grid.Row="1" Grid.Column="0"/>
-            <Label Content="von" HorizontalContentAlignment="Center"  Grid.Row="1" Grid.Column="2"/>
+            <Label Content="Votiert: " FontSize="20" Grid.Row="1" Grid.Column="0"/>
+                <Label Content="von" FontSize="20" HorizontalContentAlignment="Center"  Grid.Row="1" Grid.Column="2"/>
             <!-- Buttons -->
-                <Button x:Name="IncDoneButton" Content="▲"  Margin="20,0,20,0" HorizontalContentAlignment="Center" Grid.Column="1" Grid.Row="0" Click="ButtonUp_Click"/>
-                <Button x:Name="DecDoneButton" Content="▼"  Margin="20,0,20,0" HorizontalContentAlignment="Center" Grid.Column="1" Grid.Row="2" Click="ButtonDown_Click"/>
-                <Button x:Name="IncTotalButton" Content="▲" Margin="20,0,20,0" HorizontalContentAlignment="Center" Grid.Column="3" Grid.Row="0" Click="ButtonUp_Click"/>
-                <Button x:Name="DecTotalButton" Content="▼" Margin="20,0,20,0" HorizontalContentAlignment="Center" Grid.Column="3" Grid.Row="2" Click="ButtonDown_Click"/>
+                <Button x:Name="IncDoneButton" Content="▲" FontSize="20" Margin="20,0,20,0" HorizontalContentAlignment="Center" Grid.Column="1" Grid.Row="0" Click="ButtonUp_Click"/>
+                <Button x:Name="DecDoneButton" Content="▼" FontSize="20" Margin="20,0,20,0" HorizontalContentAlignment="Center" Grid.Column="1" Grid.Row="2" Click="ButtonDown_Click"/>
+                <Button x:Name="IncTotalButton" Content="▲" FontSize="20" Margin="20,0,20,0" HorizontalContentAlignment="Center" Grid.Column="3" Grid.Row="0" Click="ButtonUp_Click"/>
+                <Button x:Name="DecTotalButton" Content="▼" FontSize="20" Margin="20,0,20,0" HorizontalContentAlignment="Center" Grid.Column="3" Grid.Row="2" Click="ButtonDown_Click"/>
             <!-- changable Content -->
-                <Label x:Name="VotedTasksLabel" HorizontalContentAlignment="Center" Margin="20,0,20,0"  Grid.Column="1" Grid.Row="1" Content="0" />
-                <Label x:Name="TotalTasksLabel" HorizontalContentAlignment="Center" Margin="20,0,20,0"  Grid.Column="3" Grid.Row="1" Content="5" />
+                <Label x:Name="VotedTasksLabel" HorizontalContentAlignment="Center" Margin="20,0,20,0" FontSize="20" Grid.Column="1" Grid.Row="1" Content="0" />
+                <Label x:Name="TotalTasksLabel" HorizontalContentAlignment="Center" Margin="20,0,20,0" FontSize="20" Grid.Column="3" Grid.Row="1" Content="5" />
             </Grid>
     </Grid>
     </Border>
