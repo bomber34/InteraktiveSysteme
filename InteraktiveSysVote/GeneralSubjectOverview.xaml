@@ -28,7 +28,7 @@
             </Grid.ColumnDefinitions>
             <!--Content-->
             <!-- 1st Row -->
-            <Label x:Name="AverageVotedTasksLabel" Content="Durchschnitt votierter Aufgaben: " Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20"/>
+            <Label x:Name="AverageVotedTasksLabel" Content="Durchschnitt votierter Aufgaben: 0%" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20"/>
             <!-- 2nd Row-->
             <Label x:Name="AvgToDoInfoLabel" Content="Im Schnitt fehlen noch" Grid.Row="3" Grid.RowSpan="3" Grid.ColumnSpan="4" HorizontalContentAlignment="Center" FontSize="20"/>
             <!-- 3rd Row -->

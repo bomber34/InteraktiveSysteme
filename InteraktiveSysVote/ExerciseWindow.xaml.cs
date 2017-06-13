@@ -93,7 +93,7 @@ namespace InteraktiveSysVote
             }
         }
 
-        private int AverageVoted()
+        public int AverageVoted()
         {
             GetTasksDoneAndTotal(out int totalDone, out int totalAll);
             
@@ -103,7 +103,10 @@ namespace InteraktiveSysVote
 
             double average = (double)totalDone / (double) totalAll;
             average = Math.Round(average*100);
-            
+
+            generalOverview.AverageVotedTasksLabel.Content = "Durchschnitt votierter Aufgaben: " + 
+                                                             GeneralSubjectOverview.RoundTo2DecimalPoints(average) + "%";
+
             return (int) average;
         }
 
@@ -189,6 +192,7 @@ namespace InteraktiveSysVote
             if (currentNumOfAssignments > numberOfAssignements)
                 numberOfAssignements = currentNumOfAssignments;
 
+            AverageVoted();
             CalculatedAverageLeftToDo();
         }
 

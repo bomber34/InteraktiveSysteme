@@ -71,6 +71,7 @@ namespace InteraktiveSysVote
                 TotalTasks = DoneTasks;
             }
 
+            parentField.AverageVoted();
             parentField.CalculatedAverageLeftToDo();
               
         }
@@ -106,6 +107,7 @@ namespace InteraktiveSysVote
                 DoneTasks = TotalTasks;
             }
 
+            parentField.AverageVoted();
             parentField.CalculatedAverageLeftToDo();
         }
     }
