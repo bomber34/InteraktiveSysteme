@@ -45,7 +45,7 @@ namespace InteraktiveSysVote
             parentField = subjectPan;
             //Show current information in the textboxes
             SubjectNameTextBox.Text = subjectPan.SubjectNameTextBlock.Text;
-            GoalVoteAvgTextBox.Text = subjectPan.GetGoalVoted().ToString();
+            GoalVoteAvgComboBox.Text = subjectPan.GetGoalVoted().ToString();
             GoalPresentationTextBox.Text = subjectPan.GoalPresentLabel.Content.ToString();
             AvgOfTasksTextBox.Text = subjectPan.GetAverageNumTasks().ToString();
             NumOfAssignementsTextBox.Text = subjectPan.GetNumOfAssignements().ToString();
@@ -66,7 +66,7 @@ namespace InteraktiveSysVote
                                         out int assignements)
         {
             bool parsedAll = true; //If any field fails, this will be set to false
-            if(!Int32.TryParse(GoalVoteAvgTextBox.Text,out goalVote))
+            if(!Int32.TryParse(GoalVoteAvgComboBox.Text,out goalVote))
             {
                 GoalVoteInputErrorLabel.Content = "Nur natürliche Zahlen erlaubt";
                 goalVote = 0; //Set 0 for not failing again at the entry validation method
