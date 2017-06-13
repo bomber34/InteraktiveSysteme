@@ -22,7 +22,7 @@ namespace InteraktiveSysVote
     {
         
         private ExerciseWindow exerciseMenuWindow;
-
+        //Constructor
         public SubjectPanel()
         {
             InitializeComponent();
@@ -38,6 +38,8 @@ namespace InteraktiveSysVote
 
             exerciseMenuWindow = new ExerciseWindow(this, numOfTasks , numOfExercises);
         }
+
+        //Getter Setter
 
         public int GetAverageNumTasks()
         {
@@ -55,11 +57,14 @@ namespace InteraktiveSysVote
         /// <returns></returns>
         public int GetGoalVoted()
         {
+            string goal = GoalVotedLabel.Content.ToString();
             //There will always be a % at the end of the Label which has to be removed
-            System.Diagnostics.Debug.Assert(Int32.TryParse(GoalVotedLabel.Content.ToString().Remove(GoalVotedLabel.Content.ToString().Length - 1), out int result));
+            System.Diagnostics.Debug.Assert(goal.ElementAt(goal.Length-1) == '%');
 
-            return Int32.Parse(GoalVotedLabel.Content.ToString().Remove(GoalVotedLabel.Content.ToString().Length - 1));
+            return Int32.Parse(goal.Remove(goal.Length-1));
         }
+
+        
 
         /// <summary>
         /// Places a % at the end of the number
@@ -68,6 +73,27 @@ namespace InteraktiveSysVote
         public void SetGoalVotedLabel(int goalVote)
         {
             GoalVotedLabel.Content = goalVote.ToString() + "%";
+        }
+
+        /// <summary>
+        /// Gets the Number of AverageVoted Tasks without the %
+        /// </summary>
+        /// <returns></returns>
+        public int GetAverageVoted()
+        {
+            string average = GoalVotedLabel.Content.ToString();
+            //There will always be a % at the end of the Label which has to be removed
+            System.Diagnostics.Debug.Assert(average.ElementAt(average.Length-1) == '%');
+            return Int32.Parse(average.Remove(average.Length - 1));
+        }
+
+        /// <summary>
+        /// Places a % at the end of the label after editing the new number
+        /// </summary>
+        /// <param name="average"></param>
+        public void SetAverageVoted(int average)
+        {
+            AvgVotedLabel.Content = average.ToString() + "%";
         }
 
         /// <summary>
@@ -80,6 +106,7 @@ namespace InteraktiveSysVote
             exerciseMenuWindow.ApplyChanges(averageTasks, assignments);
         }
 
+        //Button Events
         private void EditSubjectBtn_Click(object sender, RoutedEventArgs e)
         { 
             //Switch the CreateSubject View

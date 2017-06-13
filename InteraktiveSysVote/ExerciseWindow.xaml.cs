@@ -27,6 +27,7 @@ namespace InteraktiveSysVote
         private StackPanel ExerciseStackPanel;
         private GeneralSubjectOverview generalOverview;
 
+        //Constructors
         public ExerciseWindow()
         {
             InitializeComponent();
@@ -74,6 +75,8 @@ namespace InteraktiveSysVote
             ExerciseWindowScrollViewer.Content = ExerciseStackPanel;
         }
 
+        //Methods
+
         /// <summary>
         /// Gets the sums of all voted and total Tasks fields in all exercisePanels
         /// </summary>
@@ -110,11 +113,9 @@ namespace InteraktiveSysVote
         private void VotedPercentageColourChange()
         {
             // Parsing will work due to this information being checked at previous steps
-            int avgVoted = Int32.Parse(parentField.AvgVotedLabel.Content.ToString()
-                .Remove(parentField.AvgVotedLabel.Content.ToString().Length - 1));
+            int avgVoted = parentField.GetAverageVoted();
 
-            int goalVote = (Int32.Parse(parentField.GoalVotedLabel.Content.ToString()
-                    .Remove(parentField.GoalVotedLabel.Content.ToString().Length - 1)));
+            int goalVote = parentField.GetGoalVoted();
 
             if ( avgVoted >= goalVote)
             { 
@@ -124,10 +125,55 @@ namespace InteraktiveSysVote
                 parentField.AvgVotedLabel.Foreground = new SolidColorBrush(Colors.Red);
         }
 
-        //BUTTONS
+        /// <summary>
+        /// Calculates the amount of remaining to do tasks per assignment
+        /// </summary>
+        public void CalculatedAverageLeftToDo()
+        {
+            int goalVote = parentField.GetGoalVoted();
+
+            int assignmentsLeft = (numberOfAssignements - currentNumOfAssignments);
+            int totalLeftTasks = avgNumOfTasks * assignmentsLeft;
+
+            GetTasksDoneAndTotal(out int totalDone, out int currentTotalTasks);
+
+            int allTasks = totalLeftTasks + currentTotalTasks;
+            int leftToDo = (int)Math.Ceiling((((double)(allTasks) / 100.0) * (double)goalVote)) - totalDone;
+
+            if (assignmentsLeft != 0)
+            {
+                double tasksPerWeek = (double)leftToDo / (double)assignmentsLeft;
+                tasksPerWeek = GeneralSubjectOverview.RoundTo2DecimalPoints(tasksPerWeek);
+                generalOverview.SetAverageTasksLeftToDoLabel(tasksPerWeek);
+            }
+            else
+                generalOverview.AvgToDoInfoLabel.Content = "Alle Übungen sind vorbei";
+        }
+
+        /// <summary>
+        /// Use these new values to recalculate the average tasks the user needs to do
+        /// </summary>
+        /// <param name="averageTasks"></param>
+        /// <param name="assignements"></param>
+        public void ApplyChanges(int averageTasks, int assignements)
+        {
+            //Set Label Content
+            SubjectNameLabel.Content = parentField.SubjectNameTextBlock.Text;
+
+            avgNumOfTasks = averageTasks;
+            numberOfAssignements = assignements;
+            originalNumAssigns = numberOfAssignements;
+
+            generalOverview.GoalPresentLabel.Content = parentField.GoalPresentLabel.Content;
+
+            VotedPercentageColourChange();
+            CalculatedAverageLeftToDo();
+        }
+
+        //Events - Buttons
         private void HomeBtn_Click(object sender, RoutedEventArgs e)
         {
-            parentField.AvgVotedLabel.Content = AverageVoted().ToString()+"%";
+            parentField.SetAverageVoted(AverageVoted());
             VotedPercentageColourChange();
 
             parentField.PresentedLabel.Content = generalOverview.NumPresentationsLabel.Content;
@@ -159,52 +205,6 @@ namespace InteraktiveSysVote
 
                 CalculatedAverageLeftToDo();
             }
-        }
-
-        /// <summary>
-        /// Calculates the amount of remaining to do tasks per assignment
-        /// </summary>
-        public void CalculatedAverageLeftToDo()
-        {
-            int goalVote = Int32.Parse(parentField.GoalVotedLabel.Content.ToString()
-                .Remove(parentField.GoalVotedLabel.Content.ToString().Length - 1));
-
-            int assignmentsLeft = (numberOfAssignements - currentNumOfAssignments);
-            int totalLeftTasks = avgNumOfTasks * assignmentsLeft;
-
-            GetTasksDoneAndTotal(out int totalDone, out int currentTotalTasks);
-
-            int allTasks = totalLeftTasks + currentTotalTasks;
-            int leftToDo = (int)Math.Ceiling((((double)(allTasks) / 100.0)*(double) goalVote)) - totalDone;
-
-            if (assignmentsLeft != 0)
-            {
-                double tasksPerWeek = (double)leftToDo / (double)assignmentsLeft;
-                tasksPerWeek = GeneralSubjectOverview.RoundTo2DecimalPoints(tasksPerWeek);
-                generalOverview.SetAverageTasksLeftToDoLabel(tasksPerWeek);
-            }
-            else
-                generalOverview.AvgToDoInfoLabel.Content = "Alle Übungen sind vorbei";
-        }
-
-        /// <summary>
-        /// Use these new values to recalculate the average tasks the user needs to do
-        /// </summary>
-        /// <param name="averageTasks"></param>
-        /// <param name="assignements"></param>
-        public void ApplyChanges(int averageTasks, int assignements)
-        {
-            //Set Label Content
-            SubjectNameLabel.Content = parentField.SubjectNameTextBlock.Text;    
-
-            avgNumOfTasks = averageTasks;
-            numberOfAssignements = assignements;
-            originalNumAssigns = numberOfAssignements;
-
-            generalOverview.GoalPresentLabel.Content = parentField.GoalPresentLabel.Content;
-
-            VotedPercentageColourChange();
-            CalculatedAverageLeftToDo();
         }
     }
 }
