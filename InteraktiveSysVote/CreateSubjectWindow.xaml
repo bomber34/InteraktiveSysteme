@@ -48,7 +48,12 @@
             <Button x:Name="AbortButton" Background="Red" Foreground="Black" Margin="10,10,10,10" Grid.Row="6" Grid.Column="2" Content="Abbrechen" FontSize="16" Click="Abort_Click"/>
             <!-- Input -->
             <TextBox x:Name="SubjectNameTextBox" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="30,0,30,0"  AcceptsReturn="False" VerticalContentAlignment="Center" FontSize="16"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="40" Background="Transparent" />
-            <TextBox x:Name="GoalVoteAvgTextBox" Grid.Column="1" Grid.Row="2" Margin="30,0,5,0" AcceptsReturn="False" Text="66" HorizontalContentAlignment="Center"   VerticalContentAlignment="Center" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="40"/>
+            <ComboBox x:Name="GoalVoteAvgComboBox" Grid.Column="1" Grid.Row="2" Margin="30,0,5,0"  Text="66" HorizontalContentAlignment="Center"   VerticalContentAlignment="Center" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="40" IsEditable="True">
+                <ComboBoxItem  Name="FiftyComboBoxItem">50</ComboBoxItem>
+                <ComboBoxItem  Name="SixtysixComboBoxItem">66</ComboBoxItem>
+                <ComboBoxItem  Name="SeventyfiveComboBoxItem">75</ComboBoxItem>
+                <ComboBoxItem  Name="EightyComboBomItem">80</ComboBoxItem>
+            </ComboBox>
             <TextBox x:Name="GoalPresentationTextBox" Grid.Column="1" Grid.Row="3" Margin="30,0,5,0" AcceptsReturn="False" Text="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Stretch"  Height="40"/>
             <TextBox x:Name="AvgOfTasksTextBox" Grid.Column="1" Grid.Row="4" Margin="30,0,5,0" AcceptsReturn="False" Text="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="40" />
             <TextBox x:Name="NumOfAssignementsTextBox" Grid.Column="1" Grid.Row="5" Margin="30,0,5,0" AcceptsReturn="False" Text="13" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Stretch"  Height="40"/>
