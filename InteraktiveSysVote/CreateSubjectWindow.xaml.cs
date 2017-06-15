@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Text.RegularExpressions;
 
 namespace InteraktiveSysVote
 {
@@ -113,7 +114,10 @@ namespace InteraktiveSysVote
         {
             bool isValid = true; //If any field fails, this will be set to false
 
-            if (name.Equals(""))
+            //Name must not contain only whitespaces
+            Regex subjectNameExpression = new Regex(@"^(?!\s*$).+");
+
+            if (!subjectNameExpression.IsMatch(name))
             {
                 NameInputErrorLabel.Content = "Darf nicht leer sein";
                 isValid = false;
