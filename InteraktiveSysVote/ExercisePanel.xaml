@@ -24,7 +24,7 @@
             <Label Content="Votiert: " FontSize="20" Grid.Row="2" Grid.Column="0"/>
             <Label Content="von" FontSize="20" HorizontalContentAlignment="Center"  Grid.Row="2" Grid.Column="2"/>
             <!-- Buttons -->
-            <Button x:Name="MinimizeButton" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Background="Transparent" BorderBrush="Transparent" Click="MinimizeButton_Click">
+            <Button x:Name="MinimizeButton" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" MinHeight="50" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Background="Transparent" BorderBrush="Transparent" Click="MinimizeButton_Click">
                 <TextBlock x:Name="ExerciseIDTextBlock" Text="Übung " FontSize="20"/>
             </Button>
             <Button x:Name="IncDoneButton" Content="▲" FontSize="20" Margin="20,0,20,0" HorizontalContentAlignment="Center" Grid.Column="1" Grid.Row="1" Click="ButtonUp_Click"/>

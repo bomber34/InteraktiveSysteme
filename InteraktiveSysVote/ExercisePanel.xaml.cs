@@ -23,9 +23,11 @@ namespace InteraktiveSysVote
     {
         public int DoneTasks { get; set; }
         public int TotalTasks { get; set; }
+        private readonly int indexID;
         private ExerciseWindow parentField;
 
-        private bool isMinimized;
+        public bool IsMinimized { get; set; }
+        private Button incDoneBtn, incTotalBtn, decDoneBtn, decTotalBtn;
 
         public ExercisePanel()
         {
@@ -40,9 +42,15 @@ namespace InteraktiveSysVote
             TotalTasks = allTasks;
 
             ExerciseIDTextBlock.Text += currentAssignment.ToString();
+            indexID = currentAssignment-1;
 
             parentField = parent;
-            isMinimized = false;
+            IsMinimized = false;
+
+            incDoneBtn = IncDoneButton;
+            incTotalBtn = IncTotalButton;
+            decDoneBtn = DecDoneButton;
+            decTotalBtn = DecTotalButton;
         }
 
         /// <summary>
@@ -102,24 +110,47 @@ namespace InteraktiveSysVote
             parentField.CalculatedAverageLeftToDo();
         }
 
-        private void MinimizePanel(bool minimize)
+        /// <summary>
+        /// If called it will remove the Buttons of this Panel in order of filling less space in the window
+        /// </summary>
+        /// <param name="minimize"></param>
+        public void MinimizePanel(bool minimized)
         {
-            if (minimize) {
-                ExercisePanelGrid.Children.Remove(IncDoneButton);
-                ExercisePanelGrid.Children.Remove(IncTotalButton);
-                ExercisePanelGrid.Children.Remove(DecDoneButton);
-                ExercisePanelGrid.Children.Remove(DecTotalButton);
+            if (!minimized) {
+                ExercisePanelGrid.Children.Remove(incDoneBtn);
+                ExercisePanelGrid.Children.Remove(incTotalBtn);
+                ExercisePanelGrid.Children.Remove(decDoneBtn);
+                ExercisePanelGrid.Children.Remove(decTotalBtn);
             }
             else
             {
-                // TODO: Add buttons back to their original position dynamically
+                ReAddButtons();
             }
+            IsMinimized = !minimized;
+        }
+
+        private void ReAddButtons()
+        {
+            ExercisePanelGrid.Children.Add(incDoneBtn);
+            Grid.SetRow(incDoneBtn, 1);
+            Grid.SetColumn(incDoneBtn, 1);
+
+            ExercisePanelGrid.Children.Add(incTotalBtn);
+            Grid.SetRow(incTotalBtn, 1);
+            Grid.SetColumn(incTotalBtn, 3);
+
+            ExercisePanelGrid.Children.Add(decDoneBtn);
+            Grid.SetRow(decDoneBtn, 3);
+            Grid.SetColumn(decDoneBtn, 1);
+
+            ExercisePanelGrid.Children.Add(decTotalBtn);
+            Grid.SetRow(decTotalBtn, 3);
+            Grid.SetColumn(decTotalBtn, 3);
         }
 
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)
         {
-            isMinimized = isMinimized ? false : true;
-            MinimizePanel(isMinimized);
+            MinimizePanel(IsMinimized);
         }
     }
 }

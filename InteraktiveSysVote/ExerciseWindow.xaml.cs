@@ -93,6 +93,10 @@ namespace InteraktiveSysVote
             }
         }
 
+        /// <summary>
+        /// Calculate how many tasks the user voted in average
+        /// </summary>
+        /// <returns></returns>
         public int AverageVoted()
         {
             GetTasksDoneAndTotal(out int totalDone, out int totalAll);
@@ -173,6 +177,22 @@ namespace InteraktiveSysVote
             CalculatedAverageLeftToDo();
         }
 
+        /// <summary>
+        /// Minimizes all but the ExercisePanel at index
+        /// </summary>
+        /// <param name="index"></param>
+        public void MinimizePanels(int index)
+        {
+            int count = 0;
+            foreach(ExercisePanel exPan in ExerciseStackPanel.Children.OfType<ExercisePanel>())
+            {
+                if (!exPan.IsMinimized && count != index)
+                    exPan.MinimizePanel(false);
+
+                count++;
+            }
+        }
+
         //Events - Buttons
         private void HomeBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -194,6 +214,8 @@ namespace InteraktiveSysVote
 
             AverageVoted();
             CalculatedAverageLeftToDo();
+
+            MinimizePanels(0);
         }
 
         private void DeleteExerciseBtn_Click(object sender, RoutedEventArgs e)
