@@ -25,6 +25,8 @@ namespace InteraktiveSysVote
         public int TotalTasks { get; set; }
         private ExerciseWindow parentField;
 
+        private bool isMinimized;
+
         public ExercisePanel()
         {
             InitializeComponent();
@@ -37,11 +39,12 @@ namespace InteraktiveSysVote
             TotalTasksLabel.Content = allTasks.ToString();
             TotalTasks = allTasks;
 
-            ExerciseIDLabel.Content += currentAssignment.ToString();
+            ExerciseIDTextBlock.Text += currentAssignment.ToString();
 
             parentField = parent;
+            isMinimized = false;
         }
-        
+
         /// <summary>
         /// Increases respective textbox number by 1
         /// </summary>
@@ -49,19 +52,11 @@ namespace InteraktiveSysVote
         /// <param name="e"></param>
         private void ButtonUp_Click(object sender, RoutedEventArgs e)
         {
-            //Label is initialized with legit numbers, therefore parsing will be successful
-            int num = (sender.Equals(IncDoneButton) ? Int32.Parse(VotedTasksLabel.Content.ToString()) :
-                                                Int32.Parse(TotalTasksLabel.Content.ToString()));
-
-            num++;
-
             if (sender.Equals(IncDoneButton)) { 
-                VotedTasksLabel.Content = num.ToString();
-                DoneTasks++;
+                VotedTasksLabel.Content = (++DoneTasks).ToString();
             }
             else { 
-                TotalTasksLabel.Content = num.ToString();
-                TotalTasks++;
+                TotalTasksLabel.Content = (++TotalTasks).ToString();
             }
 
             //VotedBox should not be greater than totalBox
@@ -83,21 +78,17 @@ namespace InteraktiveSysVote
         /// <param name="e"></param>
         private void ButtonDown_Click(object sender, RoutedEventArgs e)
         {
-            //Label is initialized with legit numbers, therefore parsing will be successful
-            int num = (sender.Equals(DecDoneButton) ? Int32.Parse(VotedTasksLabel.Content.ToString()) : Int32.Parse(TotalTasksLabel.Content.ToString()));
-
-            num--;
-            if (num < 0) //no negative numbers allowed
+            //Check if action is legit
+            int num = (sender.Equals(DecDoneButton) ? DoneTasks : TotalTasks);
+            if (num <= 0) //no negative numbers allowed
                 return;
 
             if (sender.Equals(DecDoneButton))
             {
-                VotedTasksLabel.Content = num.ToString();
-                DoneTasks--;
+                VotedTasksLabel.Content = (--DoneTasks).ToString();
             }
-            else { 
-                TotalTasksLabel.Content = num.ToString();
-                TotalTasks--;
+            else {
+                TotalTasksLabel.Content = (--TotalTasks).ToString();
             }
 
             //TotalBox should not be smaller than VotedBox
@@ -109,6 +100,26 @@ namespace InteraktiveSysVote
 
             parentField.AverageVoted();
             parentField.CalculatedAverageLeftToDo();
+        }
+
+        private void MinimizePanel(bool minimize)
+        {
+            if (minimize) {
+                ExercisePanelGrid.Children.Remove(IncDoneButton);
+                ExercisePanelGrid.Children.Remove(IncTotalButton);
+                ExercisePanelGrid.Children.Remove(DecDoneButton);
+                ExercisePanelGrid.Children.Remove(DecTotalButton);
+            }
+            else
+            {
+                // TODO: Add buttons back to their original position dynamically
+            }
+        }
+
+        private void MinimizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            isMinimized = isMinimized ? false : true;
+            MinimizePanel(isMinimized);
         }
     }
 }
