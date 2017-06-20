@@ -81,7 +81,7 @@ namespace InteraktiveSysVote
         /// <returns></returns>
         public int GetAverageVoted()
         {
-            string average = GoalVotedLabel.Content.ToString();
+            string average = AvgVotedLabel.Content.ToString();
             //There will always be a % at the end of the Label which has to be removed
             System.Diagnostics.Debug.Assert(average.ElementAt(average.Length-1) == '%');
             return Int32.Parse(average.Remove(average.Length - 1));

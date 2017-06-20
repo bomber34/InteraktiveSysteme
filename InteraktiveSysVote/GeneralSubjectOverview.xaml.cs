@@ -79,5 +79,22 @@ namespace InteraktiveSysVote
                 num--;
             NumPresentationsLabel.Content = num.ToString();
         }
+
+        private void PresentTotalUp_Click(object sender, RoutedEventArgs e)
+        {
+            //NumPresentation is a label which is initialized with a digit, therefore parsing is safe
+            int num = Int32.Parse(GoalPresentLabel.Content.ToString());
+            num++;
+            GoalPresentLabel.Content = num.ToString();
+        }
+
+        private void PresentTotalDown_Click(object sender, RoutedEventArgs e)
+        {
+            //NumPresentation is a label which is initialized with a digit, therefore parsing is safe
+            int num = Int32.Parse(GoalPresentLabel.Content.ToString());
+            if (num > 0) // There can't be negative presentations
+                num--;
+            GoalPresentLabel.Content = num.ToString();
+        }
     }
 }

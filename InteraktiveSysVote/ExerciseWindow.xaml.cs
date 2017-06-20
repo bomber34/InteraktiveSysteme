@@ -200,6 +200,7 @@ namespace InteraktiveSysVote
             VotedPercentageColourChange();
 
             parentField.PresentedLabel.Content = generalOverview.NumPresentationsLabel.Content;
+            parentField.GoalPresentLabel.Content = generalOverview.GoalPresentLabel.Content;
             HomeWindow.ReturnToMainMenu();
         }
 
