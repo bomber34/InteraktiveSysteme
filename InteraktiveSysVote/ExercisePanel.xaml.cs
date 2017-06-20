@@ -23,7 +23,11 @@ namespace InteraktiveSysVote
     {
         public int DoneTasks { get; set; }
         public int TotalTasks { get; set; }
+        private readonly int indexID;
         private ExerciseWindow parentField;
+
+        public bool IsMinimized { get; set; }
+        private Button incDoneBtn, incTotalBtn, decDoneBtn, decTotalBtn;
 
         public ExercisePanel()
         {
@@ -37,11 +41,18 @@ namespace InteraktiveSysVote
             TotalTasksLabel.Content = allTasks.ToString();
             TotalTasks = allTasks;
 
-            ExerciseIDLabel.Content += currentAssignment.ToString();
+            ExerciseIDTextBlock.Text += currentAssignment.ToString();
+            indexID = currentAssignment-1;
 
             parentField = parent;
+            IsMinimized = false;
+
+            incDoneBtn = IncDoneButton;
+            incTotalBtn = IncTotalButton;
+            decDoneBtn = DecDoneButton;
+            decTotalBtn = DecTotalButton;
         }
-        
+
         /// <summary>
         /// Increases respective textbox number by 1
         /// </summary>
@@ -49,19 +60,11 @@ namespace InteraktiveSysVote
         /// <param name="e"></param>
         private void ButtonUp_Click(object sender, RoutedEventArgs e)
         {
-            //Label is initialized with legit numbers, therefore parsing will be successful
-            int num = (sender.Equals(IncDoneButton) ? Int32.Parse(VotedTasksLabel.Content.ToString()) :
-                                                Int32.Parse(TotalTasksLabel.Content.ToString()));
-
-            num++;
-
             if (sender.Equals(IncDoneButton)) { 
-                VotedTasksLabel.Content = num.ToString();
-                DoneTasks++;
+                VotedTasksLabel.Content = (++DoneTasks).ToString();
             }
             else { 
-                TotalTasksLabel.Content = num.ToString();
-                TotalTasks++;
+                TotalTasksLabel.Content = (++TotalTasks).ToString();
             }
 
             //VotedBox should not be greater than totalBox
@@ -83,21 +86,17 @@ namespace InteraktiveSysVote
         /// <param name="e"></param>
         private void ButtonDown_Click(object sender, RoutedEventArgs e)
         {
-            //Label is initialized with legit numbers, therefore parsing will be successful
-            int num = (sender.Equals(DecDoneButton) ? Int32.Parse(VotedTasksLabel.Content.ToString()) : Int32.Parse(TotalTasksLabel.Content.ToString()));
-
-            num--;
-            if (num < 0) //no negative numbers allowed
+            //Check if action is legit
+            int num = (sender.Equals(DecDoneButton) ? DoneTasks : TotalTasks);
+            if (num <= 0) //no negative numbers allowed
                 return;
 
             if (sender.Equals(DecDoneButton))
             {
-                VotedTasksLabel.Content = num.ToString();
-                DoneTasks--;
+                VotedTasksLabel.Content = (--DoneTasks).ToString();
             }
-            else { 
-                TotalTasksLabel.Content = num.ToString();
-                TotalTasks--;
+            else {
+                TotalTasksLabel.Content = (--TotalTasks).ToString();
             }
 
             //TotalBox should not be smaller than VotedBox
@@ -109,6 +108,49 @@ namespace InteraktiveSysVote
 
             parentField.AverageVoted();
             parentField.CalculatedAverageLeftToDo();
+        }
+
+        /// <summary>
+        /// If called it will remove the Buttons of this Panel in order of filling less space in the window
+        /// </summary>
+        /// <param name="minimize"></param>
+        public void MinimizePanel(bool minimized)
+        {
+            if (!minimized) {
+                ExercisePanelGrid.Children.Remove(incDoneBtn);
+                ExercisePanelGrid.Children.Remove(incTotalBtn);
+                ExercisePanelGrid.Children.Remove(decDoneBtn);
+                ExercisePanelGrid.Children.Remove(decTotalBtn);
+            }
+            else
+            {
+                ReAddButtons();
+            }
+            IsMinimized = !minimized;
+        }
+
+        private void ReAddButtons()
+        {
+            ExercisePanelGrid.Children.Add(incDoneBtn);
+            Grid.SetRow(incDoneBtn, 1);
+            Grid.SetColumn(incDoneBtn, 1);
+
+            ExercisePanelGrid.Children.Add(incTotalBtn);
+            Grid.SetRow(incTotalBtn, 1);
+            Grid.SetColumn(incTotalBtn, 3);
+
+            ExercisePanelGrid.Children.Add(decDoneBtn);
+            Grid.SetRow(decDoneBtn, 3);
+            Grid.SetColumn(decDoneBtn, 1);
+
+            ExercisePanelGrid.Children.Add(decTotalBtn);
+            Grid.SetRow(decTotalBtn, 3);
+            Grid.SetColumn(decTotalBtn, 3);
+        }
+
+        private void MinimizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            MinimizePanel(IsMinimized);
         }
     }
 }
