@@ -76,6 +76,17 @@ namespace InteraktiveSysVote
         }
 
         //Methods
+        
+        //Return access to all exercises in correct order for saving purposes
+        public Stack<ExercisePanel> GetExercises()
+        {
+            Stack<ExercisePanel> exercises = new Stack<ExercisePanel>();
+            foreach(ExercisePanel exPan in ExerciseStackPanel.Children.OfType<ExercisePanel>())
+            {
+                exercises.Push(exPan);
+            }
+            return exercises;
+        }
 
         /// <summary>
         /// Gets the sums of all voted and total Tasks fields in all exercisePanels

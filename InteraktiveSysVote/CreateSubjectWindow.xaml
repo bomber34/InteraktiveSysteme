@@ -28,7 +28,7 @@
             </Grid.ColumnDefinitions>
 
             <!-- Labels -->
-            <Label Content="Fach erstellen" Grid.ColumnSpan="4" Background="Beige" FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+            <Label Content="Fach erstellen" Grid.ColumnSpan="4" Background="Beige" Height="50" FontSize="30" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
             <Label Content="Name: " Grid.Row="1" Grid.Column="0" FontSize="16" VerticalContentAlignment="Center" />
             <Label Content="Mindestschnitt in %:" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" FontSize="16" VerticalContentAlignment="Center" />
            <!-- miep --> <Label Content="%" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="2" Grid.Column="1" FontSize="16"/>

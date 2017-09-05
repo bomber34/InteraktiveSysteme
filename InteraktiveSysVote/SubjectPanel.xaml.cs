@@ -39,7 +39,13 @@ namespace InteraktiveSysVote
             exerciseMenuWindow = new ExerciseWindow(this, numOfTasks , numOfExercises);
         }
 
-        //Getter Setter
+        // Getter Setter
+
+        //only important when saving everything
+        public ExerciseWindow GetExcerciseWindow()
+        {
+            return exerciseMenuWindow;
+        }
 
         public int GetAverageNumTasks()
         {
