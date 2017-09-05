@@ -94,12 +94,17 @@ namespace InteraktiveSysVote
         }
 
         /// <summary>
-        /// Places a % at the end of the label after editing the new number
+        /// Places a % at the end of the label after editing the new number and chances Textcolor if voted < goal
         /// </summary>
         /// <param name="average"></param>
         public void SetAverageVoted(int average)
         {
             AvgVotedLabel.Content = average.ToString() + "%";
+
+            if (average < GetGoalVoted())
+                AvgVotedLabel.Foreground = new SolidColorBrush(Colors.Red);
+            else
+                AvgVotedLabel.Foreground = new SolidColorBrush(Colors.Black);
         }
 
         /// <summary>

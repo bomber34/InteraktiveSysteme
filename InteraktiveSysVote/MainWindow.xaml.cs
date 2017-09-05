@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace InteraktiveSysVote
 {
@@ -24,8 +25,11 @@ namespace InteraktiveSysVote
     {
         public static HomeWindow homeView;
         public static Grid mainViewGrid;
-        private static readonly int NUM_SUBJECT_INFOS = 7;
+
+        //Save Files
         private static readonly string DIR = "subjects";
+        private static readonly string GENERAL = "#####SUBJECT#####";
+        private static readonly string EXERCISE = "#####EXERCISES#####";
 
         public MainWindow()
         {
@@ -46,7 +50,68 @@ namespace InteraktiveSysVote
             string[] files = Directory.GetFiles(DIR);
             foreach(string file in files)
             {
-                //TODO: Add loading stuff
+                string path = Directory.GetCurrentDirectory() + "\\" + file;
+                StreamReader subjFile = new StreamReader(path);
+                if (subjFile.ReadLine() != GENERAL) {
+                    continue;
+                }
+
+                //General info
+                string subjName = subjFile.ReadLine();
+
+                if (!Int32.TryParse(subjFile.ReadLine(), out int avgVoted)) {
+                    continue;
+                }
+
+                if (!Int32.TryParse(subjFile.ReadLine(), out int goalVoted)) {
+                    continue;
+                }
+
+                if (!Int32.TryParse(subjFile.ReadLine(), out int presented)) {
+                    continue;
+                }
+
+                if (!Int32.TryParse(subjFile.ReadLine(), out int goalPresented))
+                {
+                    continue;
+                }
+                   
+
+                if (!Int32.TryParse(subjFile.ReadLine(), out int avgTasks)) {
+                    continue;
+                }
+                if (!Int32.TryParse(subjFile.ReadLine(), out int assignments)) {
+                    continue;
+                }
+
+                SubjectPanel subjectPan = new SubjectPanel(subjName, goalVoted, goalPresented, avgTasks, assignments);
+                subjectPan.SetAverageVoted(avgVoted);
+                subjectPan.PresentedLabel.Content = presented.ToString();
+
+                ExerciseWindow excPan = subjectPan.GetExcerciseWindow();
+                excPan.SetGeneralOverviewPresentation(presented);
+
+                //Exercises
+                if (subjFile.ReadLine() != EXERCISE) {
+                    continue;
+                }
+
+                string line;
+                string pattern = @"(\d+)\/(\d+)";
+                while((line = subjFile.ReadLine()) != null)
+                {
+                    if (Regex.IsMatch(line, pattern))
+                    { 
+                        Match match = Regex.Match(line, pattern);
+                        int done = Int32.Parse(match.Groups[1].Value);
+                        int total = Int32.Parse(match.Groups[2].Value);
+                        if (done > total)
+                            total = done;
+                        excPan.AddExercise(done, total);
+                    }
+                }
+                homeView.SubjectStackPanel.Children.Add(subjectPan);
+                subjFile.Close();
             }
         }
 
@@ -94,11 +159,11 @@ namespace InteraktiveSysVote
                 {
                     if (check >= limit)
                     {
-                        File.Delete(DIR+"/" + file);
+                        File.Delete(file);
                     }
                 }
                 else
-                    File.Delete(DIR"/" + file);
+                    File.Delete(file);
             }
         }
     }

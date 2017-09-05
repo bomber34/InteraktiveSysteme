@@ -45,8 +45,7 @@ namespace InteraktiveSysVote
             currentNumOfAssignments = 0;
 
             //Remove the %
-            int goalVote = Int32.Parse(parent.GoalVotedLabel.Content.ToString()
-                .Remove(parent.GoalVotedLabel.Content.ToString().Length - 1));
+            int goalVote = parent.GetGoalVoted();
 
             parentField = parent;
 
@@ -204,6 +203,12 @@ namespace InteraktiveSysVote
             }
         }
 
+        //During loading phase
+        public void SetGeneralOverviewPresentation(int presented)
+        {
+            generalOverview.NumPresentationsLabel.Content = presented.ToString();
+        }
+
         //Events - Buttons
         private void HomeBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -217,10 +222,15 @@ namespace InteraktiveSysVote
 
         private void AddExerciseBtn_Click(object sender, RoutedEventArgs e)
         {
+            AddExercise(0, avgNumOfTasks);
+        }
+
+        public void AddExercise(int done, int avgNumOfTasks)
+        {
             currentNumOfAssignments++;
-            ExercisePanel exercise = new ExercisePanel(this, avgNumOfTasks, currentNumOfAssignments);
+            ExercisePanel exercise = new ExercisePanel(this, done, avgNumOfTasks, currentNumOfAssignments);
             ExerciseStackPanel.Children.Insert(0, exercise);
-            
+
             if (currentNumOfAssignments > numberOfAssignements)
                 numberOfAssignements = currentNumOfAssignments;
 
