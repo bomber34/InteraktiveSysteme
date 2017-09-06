@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 using System.Text.RegularExpressions;
-using System.Diagnostics;
+
 
 namespace InteraktiveSysVote
 {
@@ -27,7 +27,8 @@ namespace InteraktiveSysVote
         public static Grid mainViewGrid;
 
         //Save Files
-        private static readonly string DIR = "subjects";
+        private static readonly string DIR = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+"\\Votiergedöns";
+        private static readonly int GENERAL_INFO_INTS = 6;
         private static readonly string GENERAL = "#####SUBJECT#####";
         private static readonly string EXERCISE = "#####EXERCISES#####";
 
@@ -42,58 +43,49 @@ namespace InteraktiveSysVote
 
             mainViewGrid.Children.Add(homeView);
             MainWindowGrid.Children.Add(mainViewGrid);
-            LoadFiles();
+            //Load previously created subjects
+            LoadSubjectFiles();
         }
 
-        private void LoadFiles()
+        //Should divide this function in smaller tasks ... someday
+        private void LoadSubjectFiles()
         {
             string[] files = Directory.GetFiles(DIR);
             foreach(string file in files)
             {
-                string path = Directory.GetCurrentDirectory() + "\\" + file;
+                string path = file;
                 StreamReader subjFile = new StreamReader(path);
                 if (subjFile.ReadLine() != GENERAL) {
-                    continue;
+                    Console.WriteLine("Someone messed with the save file >.>");
                 }
 
                 //General info
                 string subjName = subjFile.ReadLine();
+                int[] saveInfo = new int[GENERAL_INFO_INTS];
 
-                if (!Int32.TryParse(subjFile.ReadLine(), out int avgVoted)) {
-                    continue;
-                }
-
-                if (!Int32.TryParse(subjFile.ReadLine(), out int goalVoted)) {
-                    continue;
-                }
-
-                if (!Int32.TryParse(subjFile.ReadLine(), out int presented)) {
-                    continue;
-                }
-
-                if (!Int32.TryParse(subjFile.ReadLine(), out int goalPresented))
+                for(int i = 0; i < GENERAL_INFO_INTS; i++)
                 {
-                    continue;
-                }
-                   
+                    if (!Int32.TryParse(subjFile.ReadLine(), out int info))
+                        info = 0; //reset attribute to 0 if someone messed with save File
 
-                if (!Int32.TryParse(subjFile.ReadLine(), out int avgTasks)) {
-                    continue;
-                }
-                if (!Int32.TryParse(subjFile.ReadLine(), out int assignments)) {
-                    continue;
+                    saveInfo[i] = info;
                 }
 
-                SubjectPanel subjectPan = new SubjectPanel(subjName, goalVoted, goalPresented, avgTasks, assignments);
-                subjectPan.SetAverageVoted(avgVoted);
-                subjectPan.PresentedLabel.Content = presented.ToString();
+                SubjectPanel subjectPan = new SubjectPanel(subjName, 
+                    saveInfo[(int) SaveFileAccess.GOAL_VOTED],
+                    saveInfo[(int) SaveFileAccess.GOAL_PRESENETED], 
+                    saveInfo[(int) SaveFileAccess.AVG_TASKS], 
+                    saveInfo[(int) SaveFileAccess.NUM_ASSIGNMENTS]);
+
+                subjectPan.SetAverageVoted(saveInfo[(int) SaveFileAccess.AVG_VOTED]);
+                subjectPan.PresentedLabel.Content = saveInfo[(int)SaveFileAccess.PRESENTED].ToString();
 
                 ExerciseWindow excPan = subjectPan.GetExcerciseWindow();
-                excPan.SetGeneralOverviewPresentation(presented);
+                excPan.SetGeneralOverviewPresentation(saveInfo[(int)SaveFileAccess.PRESENTED]);
 
                 //Exercises
                 if (subjFile.ReadLine() != EXERCISE) {
-                    continue;
+                    Console.WriteLine("Someone messed with the save file >.>");
                 }
 
                 string line;
@@ -122,11 +114,11 @@ namespace InteraktiveSysVote
             int subjectNum = 1;
             foreach(SubjectPanel subject in homeView.SubjectStackPanel.Children.OfType<SubjectPanel>())
             {
-                string path = "subjects/subj" + subjectNum+".sbj";
+                string path = DIR + "\\" + "Subject"+ subjectNum + ".sbj";
                 using (StreamWriter sw = File.CreateText(path))
                 {
                     //general information -> 7 important dates
-                    sw.WriteLine("#####SUBJECT#####");
+                    sw.WriteLine(GENERAL);
                     sw.WriteLine(subject.SubjectNameTextBlock.Text);
                     sw.WriteLine(subject.GetAverageVoted().ToString());
                     sw.WriteLine(subject.GetGoalVoted().ToString());
@@ -135,7 +127,7 @@ namespace InteraktiveSysVote
                     sw.WriteLine(subject.GetAverageNumTasks().ToString());
                     sw.WriteLine(subject.GetNumOfAssignements().ToString());
                     //information for subwindow
-                    sw.WriteLine("#####EXERCISES#####");
+                    sw.WriteLine(EXERCISE);
                     Stack<ExercisePanel> exercises = subject.GetExcerciseWindow().GetExercises();
                     foreach (ExercisePanel exPan in exercises)
                     {
@@ -144,11 +136,11 @@ namespace InteraktiveSysVote
                 }
                 subjectNum++;
             }
-            //delete unnecessary files
+            //delete unnecessary files like deleted subjects during usage
             DeleteUnnecessaryFiles(subjectNum);
         }
 
-        //Deletes any file which is not needed for saving any information
+        //Deletes any file which is not needed for saving any information in the save folder
         private void DeleteUnnecessaryFiles(int limit)
         {
             string[] files = Directory.GetFiles(DIR);

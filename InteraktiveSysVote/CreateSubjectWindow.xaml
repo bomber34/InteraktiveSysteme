@@ -45,7 +45,7 @@
 
             <!-- Buttons -->
             <Button x:Name="AcceptButton" Background="Green" Foreground="White" Margin="10,10,10,10" Grid.Row="6" Grid.Column="1" Content="Erstellen" FontSize="16" Click="Accept_Click" />
-            <Button x:Name="AbortButton" Background="Red" Foreground="Black" Margin="10,10,10,10" Grid.Row="6" Grid.Column="2" Content="Abbrechen" FontSize="16" Click="Abort_Click"/>
+            <Button x:Name="AbortButton" Background="Red" Foreground="White" Margin="10,10,10,10" Grid.Row="6" Grid.Column="2" Content="Abbrechen" FontSize="16" Click="Abort_Click"/>
             <!-- Input -->
             <TextBox x:Name="SubjectNameTextBox" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="30,0,30,0"  AcceptsReturn="False" VerticalContentAlignment="Center" FontSize="16"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="40" Background="Transparent" />
             <ComboBox x:Name="GoalVoteAvgComboBox" Grid.Column="1" Grid.Row="2" Margin="30,0,5,0"  Text="66" HorizontalContentAlignment="Center"   VerticalContentAlignment="Center" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="40" IsEditable="True">
