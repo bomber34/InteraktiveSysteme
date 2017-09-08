@@ -47,67 +47,87 @@ namespace InteraktiveSysVote
             LoadSubjectFiles();
         }
 
-        //Should divide this function in smaller tasks ... someday
         private void LoadSubjectFiles()
         {
             string[] files = Directory.GetFiles(DIR);
             foreach(string file in files)
             {
-                string path = file;
-                StreamReader subjFile = new StreamReader(path);
-                if (subjFile.ReadLine() != GENERAL) {
-                    Console.WriteLine("Someone messed with the save file >.>");
-                }
+                //ignore wrong file types
+                if (!Regex.IsMatch(file, @"\.sbj$"))
+                    continue;
 
-                //General info
-                string subjName = subjFile.ReadLine();
-                int[] saveInfo = new int[GENERAL_INFO_INTS];
+                StreamReader subjFile = new StreamReader(file);
 
-                for(int i = 0; i < GENERAL_INFO_INTS; i++)
-                {
-                    if (!Int32.TryParse(subjFile.ReadLine(), out int info))
-                        info = 0; //reset attribute to 0 if someone messed with save File
+                if (subjFile.ReadLine() != GENERAL)
+                    Console.WriteLine("Someone messed with the file"); //Figure a better way for debugging out ...
 
-                    saveInfo[i] = info;
-                }
-
-                SubjectPanel subjectPan = new SubjectPanel(subjName, 
-                    saveInfo[(int) SaveFileAccess.GOAL_VOTED],
-                    saveInfo[(int) SaveFileAccess.GOAL_PRESENETED], 
-                    saveInfo[(int) SaveFileAccess.AVG_TASKS], 
-                    saveInfo[(int) SaveFileAccess.NUM_ASSIGNMENTS]);
-
-                subjectPan.SetAverageVoted(saveInfo[(int) SaveFileAccess.AVG_VOTED]);
-                subjectPan.PresentedLabel.Content = saveInfo[(int)SaveFileAccess.PRESENTED].ToString();
-
-                ExerciseWindow excPan = subjectPan.GetExcerciseWindow();
-                excPan.SetGeneralOverviewPresentation(saveInfo[(int)SaveFileAccess.PRESENTED]);
-
-                //Exercises
-                if (subjFile.ReadLine() != EXERCISE) {
-                    Console.WriteLine("Someone messed with the save file >.>");
-                }
-
-                string line;
-                string pattern = @"(\d+)\/(\d+)";
-                while((line = subjFile.ReadLine()) != null)
-                {
-                    if (Regex.IsMatch(line, pattern))
-                    { 
-                        Match match = Regex.Match(line, pattern);
-                        int done = Int32.Parse(match.Groups[1].Value);
-                        int total = Int32.Parse(match.Groups[2].Value);
-                        if (done > total)
-                            total = done;
-                        excPan.AddExercise(done, total);
-                    }
-                }
-                homeView.SubjectStackPanel.Children.Add(subjectPan);
+                LoadSubjectPanel(ref subjFile);
                 subjFile.Close();
             }
         }
 
-        //Saves subjects
+        //Load the SubjectPanel from the SaveFile
+        private void LoadSubjectPanel(ref StreamReader subjFile)
+        {
+            //General info
+            string subjName = subjFile.ReadLine();
+            int[] saveInfo = new int[GENERAL_INFO_INTS];
+
+            for (int i = 0; i < GENERAL_INFO_INTS; i++)
+            {
+                if (!Int32.TryParse(subjFile.ReadLine(), out int info))
+                    info = 0; //reset attribute to 0 if someone messed with save File
+
+                saveInfo[i] = info;
+            }
+
+            SubjectPanel subjectPan = new SubjectPanel(subjName,
+                saveInfo[(int)SaveFileAccess.GOAL_VOTED],
+                saveInfo[(int)SaveFileAccess.GOAL_PRESENETED],
+                saveInfo[(int)SaveFileAccess.AVG_TASKS],
+                saveInfo[(int)SaveFileAccess.NUM_ASSIGNMENTS]);
+
+            subjectPan.SetAverageVoted(saveInfo[(int)SaveFileAccess.AVG_VOTED]);
+            subjectPan.PresentedLabel.Content = saveInfo[(int)SaveFileAccess.PRESENTED].ToString();
+
+            //Start recreating the ExerciseWindow
+            ExerciseWindow excWin = subjectPan.GetExcerciseWindow();
+            excWin.SetGeneralOverviewPresentation(saveInfo[(int)SaveFileAccess.PRESENTED]);
+
+            LoadExerciseWindow(ref subjFile, ref excWin);
+
+            homeView.SubjectStackPanel.Children.Add(subjectPan);
+        }
+
+        //Load the ExerciseWindow from the SaveFile
+        private void LoadExerciseWindow(ref StreamReader subjFile, ref ExerciseWindow excWin)
+        {
+
+            //Another file integrity check
+            if (subjFile.ReadLine() != EXERCISE)
+            {
+                Console.WriteLine("Someone messed with the save file >.>");
+            }
+
+            string line;
+            string pattern = @"(\d+)\/(\d+)"; //In file: (int)NUM_DONE/(int)NUM_TOTAL
+            while ((line = subjFile.ReadLine()) != null)
+            {
+                if (Regex.IsMatch(line, pattern))
+                {
+                    Match match = Regex.Match(line, pattern);
+                    int done = Int32.Parse(match.Groups[1].Value);
+                    int total = Int32.Parse(match.Groups[2].Value);
+                    
+                    //Can't do more tasks than there exist
+                    if (done > total)
+                        total = done;
+                    excWin.AddExercise(done, total);
+                }
+            }
+        }
+
+        //Saves subjects when program is closed
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             //Save information about subjects
@@ -146,7 +166,7 @@ namespace InteraktiveSysVote
             string[] files = Directory.GetFiles(DIR);
             foreach(string file in files)
             {
-                string subjNum = Regex.Match(file, @"\d+").Value;
+                string subjNum = Regex.Match(file, @"(\d+)\.sbj$").Groups[1].Value;
                 if (Int32.TryParse(subjNum, out int check))
                 {
                     if (check >= limit)
