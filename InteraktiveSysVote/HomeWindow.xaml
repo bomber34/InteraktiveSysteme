@@ -10,6 +10,7 @@
         <!--Options-->
         <DockPanel DockPanel.Dock="Top" HorizontalAlignment="Stretch" Height="50" LastChildFill="False" VerticalAlignment="Top" Width="Auto">
             <Button x:Name="AddSubjectButton"  Content="Neues Fach" FontSize="25" Height="50" VerticalAlignment="Top" Width="200" Click="AddSubjectBtn_Click"/>
+            <Button x:Name="DeleteAllButton" Content="Alles Löschen" FontSize="25" Height="50" VerticalAlignment="Top" Width="200" Click="DeleteAllButton_Click"/>
         </DockPanel>
         <!--Design Filler -->
         <Label DockPanel.Dock="Top" Content="Fächer" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" 

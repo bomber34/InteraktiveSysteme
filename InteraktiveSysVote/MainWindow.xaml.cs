@@ -31,6 +31,10 @@ namespace InteraktiveSysVote
         private static readonly int GENERAL_INFO_INTS = 6;
         private static readonly string GENERAL = "#####SUBJECT#####";
         private static readonly string EXERCISE = "#####EXERCISES#####";
+        //GENERAL_INFO_ACCESS
+        private static readonly int AVG_VOTED = 0, 
+            GOAL_VOTED = 1, PRESENTED = 2, GOAL_PRESENTED = 3,
+            AVG_TASKS = 4, NUM_ASSIGNS = 5; 
 
         public MainWindow()
         {
@@ -81,18 +85,15 @@ namespace InteraktiveSysVote
                 saveInfo[i] = info;
             }
 
-            SubjectPanel subjectPan = new SubjectPanel(subjName,
-                saveInfo[(int)SaveFileAccess.GOAL_VOTED],
-                saveInfo[(int)SaveFileAccess.GOAL_PRESENETED],
-                saveInfo[(int)SaveFileAccess.AVG_TASKS],
-                saveInfo[(int)SaveFileAccess.NUM_ASSIGNMENTS]);
+            SubjectPanel subjectPan = new SubjectPanel(subjName, saveInfo[GOAL_VOTED],
+                saveInfo[GOAL_PRESENTED], saveInfo[AVG_TASKS], saveInfo[NUM_ASSIGNS]);
 
-            subjectPan.SetAverageVoted(saveInfo[(int)SaveFileAccess.AVG_VOTED]);
-            subjectPan.PresentedLabel.Content = saveInfo[(int)SaveFileAccess.PRESENTED].ToString();
+            subjectPan.SetAverageVoted(saveInfo[AVG_VOTED]);
+            subjectPan.PresentedLabel.Content = saveInfo[PRESENTED].ToString();
 
             //Start recreating the ExerciseWindow
             ExerciseWindow excWin = subjectPan.GetExcerciseWindow();
-            excWin.SetGeneralOverviewPresentation(saveInfo[(int)SaveFileAccess.PRESENTED]);
+            excWin.SetGeneralOverviewPresentation(saveInfo[PRESENTED]);
 
             LoadExerciseWindow(ref subjFile, ref excWin);
 

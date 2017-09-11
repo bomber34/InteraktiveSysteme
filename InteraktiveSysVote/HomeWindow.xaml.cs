@@ -43,5 +43,16 @@ namespace InteraktiveSysVote
             MainWindow.mainViewGrid.Children.Add(createNewSub);
         }
 
+        private void DeleteAllButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(SubjectStackPanel.Children.Count > 0)
+            { 
+                //Create dialog with user to be sure they want to delete the subject
+                MessageBoxResult result = MessageBox.Show("Möchtest du wirklich alle Fächer löschen?",
+                    "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                    SubjectStackPanel.Children.RemoveRange(0, SubjectStackPanel.Children.Count);
+            }
+        }
     }
 }

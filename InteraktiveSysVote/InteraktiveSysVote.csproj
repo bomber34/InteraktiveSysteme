@@ -74,7 +74,6 @@
     <Compile Include="HomeWindow.xaml.cs">
       <DependentUpon>HomeWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SaveFileEnum.cs" />
     <Compile Include="SubjectPanel.xaml.cs">
       <DependentUpon>SubjectPanel.xaml</DependentUpon>
     </Compile>
